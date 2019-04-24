@@ -25,7 +25,65 @@ A function $A:[0,1]^2 \to [0,1]$ with the following properties:
 
 1. $\forall x \in [0,1]: A(x,1) = A(1,x) = x, A(x,0) = A(0,x) = 0$
 
-2. For  $0 \leq x_1 \leq x_2 \leq 1$ and $0 \leq y_1 \leq y_2 \leq 1$
+2. For  $0 \leq x_1 \leq x_2 \leq 1$ and $0 \leq y_1 \leq y_2 \leq 1$ we have:
+    $A(x_2,y_2) - A(x_1,y_2) - A(x_2,y_1) + A(x_1,y_1) \geq 0$
+
+    
+## Examples of Copulae
+* $M(x,y) = \text{min}\{x,y\}$
+* $\Pi(x,y) = x \cdot y$
+* $W(x,y) = \text{max}\{x+y-1,0\}$
+
+
+## Copulae - the Sklar theorem:
+Let $H$ denote the joint distribution of the random variables $X,Y$. Furhermore, let $X \sim F$ and $Y \sim G$. Then, there exists a Copula $A$, such that for all $x,y \in \mathbb{R}$ whe have:
+$$ H(x,y) = A(F(x),G(y)) $$
+For continous $F,G$, the Copula $A$ is unique.
+On the other hand, for every Copula $A$, we get a two-dimensional distribution via $A(F,G)$.
+
+So, (two-dimensional) Copulae give us the link between two-dimensional distributions and their boundary-distributions.
+
+## Empirical Copulae:
+
+## Checkerbord Copulae:
+
+## emp_c_copula, appreciate it: {.tabset}
+
+### Explanation
+The function computes the mass-distribution of the empirical (checkerboard) copula, given a bivariate sample $(x_1,y_1),\dots,(x_n,y_n)$.
+
+function: emp_c_copula($X$,smoothing,resolution)
+
+Arguments:
+
+* $X$: a dataframe with two columns, which contains the bivariate sample. Each row corresponds to one observation
+
+* smoothing: a logical indicating, whether the checkerboard copula is computed. (default = TRUE)
+
+* resolution: an integer indicating the number of vertical/horizontal strips of the checkerboard copula.
+
+Via emp_c_copula_eval($X$,$u$,smoothing,resolution), you can directly evaluate the copula at the designated points $u$
+
+### Example
+
+```{r, message=FALSE}
+#install.packages("qad")
+library(qad)
+```
+
+```{r}
+n = 200
+X = data.frame(x1 = runif(n,0,1), x2 = runif(n,0,1))
+
+emp_cop = emp_c_copula(X,smoothing = FALSE,resolution = 20)
+emp_check_cop = emp_c_copula(X,smoothing = TRUE,resolution = 20)
+
+plot_density(emp_cop)
+plot_density(emp_check_cop)
+```
+
+
+
 
 ## Exercise {.tabset}
 
