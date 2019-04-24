@@ -1,0 +1,43 @@
+---
+title: "Presentation QAD-package"
+author: "Fabian Oberreiter, Konrad Medicus, Tobias Hilgart"
+date: "24 4 2019"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+## What is a Copula?
+A simple (implicit) definition of a Copula is as follows:
+
+The joint distribution of two -- on $[0,1]$ -- continous random variables, restricted to $[0,1]^2$
+
+This implies the following two properties, which are also used to define two-dimensional Copulae explicitly:
+
+A function $A:[0,1]^2 \to [0,1]$ with the following properties:
+
+1. $\forall x \in [0,1]: A(x,1) = A(1,x) = x, A(x,0) = A(0,x) = 0$
+
+2. For  $0 \leq x_1 \leq x_2 \leq 1$ and $0 \leq y_1 \leq y_2 \leq 1$
+
+## Exercise {.tabset}
+
+### What to do
+
+Do something
+
+### Solution
+
+What you should have done
+
+```{r}
+plot(c(1,2,3),c(1,2,3))
+```
+
