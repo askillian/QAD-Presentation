@@ -107,4 +107,63 @@ We want to check, whether the checkerboard copula can really estimate the "true"
 
 To get, how the density of the product copula looks, recall the PIT (Probability Integral Transform): For $X \sim F$ and $F$ cont., $F(X)$ has uniform distribution.
 
+# The function plot_density:
+
+# Dependence Measure $\zeta_1$
+
+## Motivation
+
+So, Copulae give us information of the dependency between $X$ and $Y$: If they are independent (i.e. information about $X$ does not give us any about $Y$ and vice versa), we already established, that the product Copula $\Pi$ describes exactly that.
+
+On the other hand we could have complete dependence, i.e. knowing $X$ we pretty much know $Y$. Such a property should be reflected in the Copula and we want to use this to construct a *dependence measure*
+
+## The one to measure them all:
+
+A couple of math later, we define said depencence measure for a Copula $A$ to be
+$$ \zeta_1(A) := 3 D_1(A,\Pi) \; \in [0,1] $$
+where $\Pi$ is the product Copula and $D_1$ is a metric for Copulae. As it's construction involves markov kernels, we make do without discussing $D_1$ in detail.
+
+We now compare a Copula to $\Pi$, to "complete randomness" so to say. Indeed, in accordance to our intuition, completely dependent Copulae have the highest dependence measure $1$, while $\Pi$ itself has dependence measure $0$.
+
+## That's nice chap, but what do I do?
+
+Now, we have a sample $(x_1,y_1), \dots, (x_n, y_n)$ and we would like to know "a" degree of dependency between the underlying RV-s $X$ and $Y$.
+
+But wait, we already know how to estimate the copula $A$, that describes the distribution $F_{(X,Y)}$ and that is the empirical (checkerboard) copula!
+
+We note, that the "plain" empirical copula might not neccisarily converge to the "true" one in the $D_1$ metric, where the empirical checkerboard does, so lucky us!
+
+## That means:
+
+So, we calculate the empirical checkerboard copula $A_n$ -- for sufficiently large sample size $n$ a good estimate for $A$. Then we simply estimate the dependency between $X$ and $Y$ as $\zeta_1(A_n)$
+
+That seems like quite a bit of work to do all that by hand, now if only there was a R-function that would spare us the hassle...
+
+## The function qad: What we do
+*qad(df, resolution, permutation)* or
+
+*qad(x,y, resolution, permutation)*;
+
+Arguments:
+
+* df or x,y: either two vectors x,y or a dataframe containing them, our sample;
+
+* resolution: the resolution of the empirical checkerboard copula we need to calculate,
+  NULL uses the optimal resolution by default;
+  
+* permutation: whether a permutated p-value is to be constructed default = FALSE.
+
+## The function qad: What we do
+
+* nperm: the number of permutation runs
+
+* DoParallel: whether the permutation test is computed in parallel
+
+* ncores: the number of cores used for parallel calculation. By default (=NULL), uses
+  max(cores)-1
+  
+* print: whether the result is printed to the console
+
+## The function qad: What we get:
+
 
