@@ -51,17 +51,40 @@ Given a sample, how would you estimate the underlying distribution if, say, the 
 
 We can (try to) do the same with Copulae, since the Sklar theorem at least gives us the existencce of a Copula $A_n$ i.e. $H_n(x,y) = A_n(F_n(x),G_n(y))$.
 
-However, depending on the metric used, we will not get convergence just like that.
+However, depending on the metric used, such as the to be introduced $D_1$, we will not get convergence just like that.
+
+## Empirical Copula -- Example
+
+```{r, echo=FALSE, message = FALSE, fig.height=3}
+set.seed(2019)
+x = rnorm(8)
+y = runif(8)
+
+require(gridExtra)
+
+p1 = qplot(x,y) + theme_bw() + theme(aspect.ratio = 1)
+p2 = qplot(ecdf(x)(x),ecdf(y)(y)) + theme_bw() + theme(aspect.ratio = 1) + xlim(0,1) + ylim(0,1)
+
+grid.arrange(p1,p2,ncol=2)
+
+```
+
+We now take any Copula $B$ and shrink it down by $\frac{1}{n}$ -- now it has the size of a single square of the grid. Then we put this shrunk $B$ for each grid square with a pseudo--observation for it's upper right corner.
+
 
 ## Checkerbord Copulae:
+We would like to have convergence even in the mysterious $D_1$ metric. One problem with an empirical copula could be the hard differentiation empty grid square / fully filled grid square.
+
 An expedient for this problem is to mollify/aggregate, which leads to checkerbord copulae:
 
 ## Example
 
 ```{r,echo=FALSE,warning=FALSE}
-X = data.frame(x = rnorm(100),y = rnorm(100))
-cop = emp_c_copula(X,smoothing = TRUE,resolution = 100)
-plot_density(cop)
+set.seed(2019)
+x = rnorm(8)
+y = runif(8)
+cop = emp_c_copula(data.frame(x,y),smoothing = TRUE,resolution = 30)
+plot_density(cop) + theme(aspect.ratio = 1)
 ```
 
 
@@ -98,16 +121,23 @@ emp_cop = emp_c_copula(X,smoothing = FALSE)
 emp_check_cop = emp_c_copula(X,smoothing = TRUE,resolution = 20)
 ```
 
+## The function plot_density:
 
+Plots the density/mass of the empirical checkerboard copula.
+
+*plot_density(mass_matrix, density = TRUE)*
+
+Arguments:
+
+* mass_matrix: a squared matrix containing the mass distribution, e.g. output of emp_c_copula()
+
+* density: a logical whether the density or mass is plotted.
 
 
 ## Exercise 1
 
-We want to check, whether the checkerboard copula can really estimate the "true" one. For that, take two independent random variables -- so you know, that the copula for the joint distribution is the product copula.
 
-To get, how the density of the product copula looks, recall the PIT (Probability Integral Transform): For $X \sim F$ and $F$ cont., $F(X)$ has uniform distribution.
 
-# The function plot_density:
 
 # Dependence Measure $\zeta_1$
 
