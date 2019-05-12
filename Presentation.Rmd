@@ -68,6 +68,8 @@ Given a sample $S$ of size $n$ of a random variables $X$, how would we estimate 
 
 The Empirical Distribution Function is defined as:
 $$\hat F_n(x) = \frac{\#\{x_i\in S|x_i\leq x\}}{n}$$
+
+In R, this function can be calculated via the call *ecdf(sample)*
 <!-- In R this can be calculated with the function ecdf(x).  -->
 
 ## Empirical Copula
@@ -91,22 +93,35 @@ grid.arrange(p1,p2,ncol=2)
 
 We now take any copula $B$ and shrink it down by $\frac{1}{n}$ -- now it has the size of a single square of the grid. Then we put this shrunk $B$ for each grid square with a pseudo--observation for its upper right corner.
 
+## Empirical Copula -- Example
+
+```{r, fig.height=3.5, echo = FALSE}
+emp_cop = emp_c_copula(data.frame(x,y), smoothing=FALSE)
+plot_density(emp_cop, density = FALSE)+ theme_bw() + theme(aspect.ratio = 1) + xlim(0,1) + ylim(0,1) +
+  geom_point(data = data.frame(x=ecdf(x)(x), y=ecdf(y)(y)), aes(x=x,y=y))
+```
+
+This is, how an empirical copula may look like, if we constructed it using the product copula $\Pi$.
+
 
 ## Checkerbord Copulae:
-We would like to have convergence even in the mysterious $D_1$ metric. One problem with an empirical copula could be the hard differentiation empty grid square / fully filled grid square.
-<!-- TODO: was ist damit gemeint? -->
+We would like to have convergence even in the mysterious $D_1$ metric. 
 
-An expedient for this problem is to mollify/aggregate, which leads to checkerbord copulae:
+One problem could be, that the sample size dictates, how many squares actually have mass and that mass is always the same, $\frac{1}{n}\text{mass of }B$ or $0$.
+
+What we could try to do is decoupling the fineness of the grid from the sample size (ensuring, that we still end up with a copula).
+
+An absolutely continous Copula, whose density is constant on the interior of each square of our (refined) $N \times N$ grid, we call $N-$ Checkerboard Copula.
+<!-- TODO: was ist damit gemeint? -->
 
 ## Example
 
-```{r,echo=FALSE,warning=FALSE}
-set.seed(2019)
-x = rnorm(8)
-y = runif(8)
+```{r,echo=FALSE,warning=FALSE, fig.height=3.5}
 cop = emp_c_copula(data.frame(x,y),smoothing = TRUE,resolution = 30)
-plot_density(cop) + theme(aspect.ratio = 1)
+plot_density(cop, density = FALSE) + theme(aspect.ratio = 1)
 ```
+
+We started with the same (pseudo-) observations, but achieved smoother transitions between squares with mass / no mass.
 
 
 ## emp_c_copula
@@ -163,13 +178,13 @@ Arguments:
 
 So, Copulae give us information of the dependency between $X$ and $Y$: If they are independent (i.e. information about $X$ does not give us any about $Y$ and vice versa), we already established, that the product Copula $\Pi$ describes exactly that.
 
-On the other hand we could have complete dependence, i.e. knowing $X$ we pretty much know $Y$. Such a property should be reflected in the Copula and we want to use this to construct a *dependence measure*
+On the other hand we could have complete dependence, i.e. knowing $X$ we pretty much know $Y$ and vice versa. Such a property should be reflected in the Copula and we want to use this to construct a *dependence measure*
 
 ## The one to measure them all:
 
 A couple of math later, we define said depencence measure for a Copula $A$ to be
 $$ \zeta_1(A) := 3 D_1(A,\Pi) \; \in [0,1] $$
-where $\Pi$ is the product Copula and $D_1$ is a metric for Copulae. As it's construction involves markov kernels, we make do without discussing $D_1$ in detail.
+where $\Pi$ is the product Copula and the mysterious $D_1$ is, as stated before, a metric for Copulae. As it's construction involves markov kernels, we make do without discussing $D_1$ in detail.
 
 We now compare a Copula to $\Pi$, to "complete randomness" so to say. Indeed, in accordance to our intuition, completely dependent Copulae have the highest dependence measure $1$, while $\Pi$ itself has dependence measure $0$.
 
@@ -179,7 +194,7 @@ Now, we have a sample $(x_1,y_1), \dots, (x_n, y_n)$ and we would like to know "
 
 We already know how to estimate the copula $A$, that describes the distribution $F_{(X,Y)}$ and that is the empirical (checkerboard) copula.
 
-We note, that the "plain" empirical copula might not neccisarily converge to the "true" one in the $D_1$ metric, where the empirical checkerboard does, so lucky us!
+We note again, that the "plain" empirical copula might not neccisarily converge to the "true" one in the $D_1$ metric, where the empirical checkerboard does, so lucky us!
 
 ## That means:
 
