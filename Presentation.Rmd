@@ -137,11 +137,26 @@ plot_density(emp_cop, density = FALSE)+ theme_bw() + theme(aspect.ratio = 1) + x
 This is, how an empirical copula may look like, if we constructed it using the product copula $\Pi$.
 
 
-## Checkerbord Copulae:
-We would like to have convergence even in the mysterious $D_1$ metric. 
-<!-- TODO: Definition auf welchem Raum D_1 definiert ist plus was es ca. macht. -->
+## Checkerbord Copulae: Motivation
 
-One problem could be, that the sample size dictates, how many squares actually have mass and that mass is always the same, $\frac{1}{n}\text{mass of }B$ or $0$.
+Depending on the metric used, an empirical copula might not suffice to estimate the "true" one.
+
+If we take the uniform distance $d_\infty$, then an empirical coupla $A_n^B$ (we denote the Copula $B$ which we used to construct the empirical) of, say, the product copula $\Pi$ may converge, i.e.
+$$ d_\infty(A_n^B, \Pi) = \text{max}\{|A_n^B(x,y) - \Pi(x,y); \; x,y \in [0,1]\} \to 0 $$
+as $n \to \infty$
+
+## Checkerboard Copulae: Motivation
+
+However, if we use another metric on Copulae, $D_1$, we may be in trouble. To construct this metric, we use special markov kernels called *regular conditional distributions* like this:
+$$ K(X(\omega), B) = \mathbb{E}(\mathbb{1}_B \circ Y | X) $$
+and then define
+$$ D_1(A,B) := \int_{[0,1]} \int_{[0,1]} |K_A(x,[0,y]) - K_B(x,[0,y])| \;dx \; dy $$
+In this metric then, $D_1(A_n^B,\Pi) \xrightarrow{n \to \infty} \frac{1}{3}$, which is bad.
+
+## Checkerbord Copulae:
+We would like to have convergence even in the $D_1$ metric however.
+
+One problem of empirical copulae could be, that the sample size dictates, how many squares actually have mass and that mass is always the same, $\frac{1}{n}\text{mass of }B$ or $0$.
 
 What we could try to do is decoupling the fineness of the grid from the sample size (ensuring, that we still end up with a copula).
 
@@ -176,6 +191,7 @@ emp_check_cop = emp_c_copula(df,smoothing = TRUE,resolution = 20)
 ```
 
 ## The Function plot_density:
+<!-- TODO: documentation, we can also plot the mass distr -->
 The function plot_density allows us to visualize copulae by plotting its density.
 ```{r,echo = FALSE, message=FALSE}
 require(gridExtra)
@@ -192,7 +208,7 @@ grid.arrange(p1,p2,ncol=2)
 
 
 ## Exercise 1 - Empirical copula
-
+<!-- TODO: Is this an actual exercise or an draft? I wouldn't understand what to do -->
   * Compute the mass distribution of the empirical checkerboard copula
   
   * 
@@ -268,7 +284,7 @@ df = data.frame(x,y)
 mod = qad(df, print = FALSE, permutation = TRUE, resolution = 15)
 mod$results
 ```
-
+<!-- Comment: Ich wuerd hier ein Bsp zur ein/beidseitigen Abhaengigkeit einfuegen und dann pairwise/heatmap vorziehen-->
 ## Ecercise 2 - qad
   
   * Download the RTR-dataset 
