@@ -98,9 +98,6 @@ $$\hat F_n(x) = \frac{\#\{x_i\in S|x_i\leq x\}}{n}$$
 In R, this function can be calculated via the call *ecdf(sample)*
 <!-- In R this can be calculated with the function ecdf(x).  -->
 
-## Exercise 0 - Empirical distribution function
-<!-- TODO optional -->
-
 ## Empirical Copula
 We can try a similar approach with copulae, since the Sklar theorem at least gives us the existence of a copula $A_n$, i.e. 
 $H_n(x,y) = A_n(F_n(x),G_n(y))$.
@@ -182,8 +179,8 @@ The function emp_c_copula the mass-distribution of the empirical (checkerboard) 
 library(qad)
 ```
 ```{r}
-n = 200
-x = runif(n,0,1)
+n = 15
+x = rnorm(n,0,1)
 y = runif(n,0,1) 
 df = data.frame(x,y)
 emp_cop = emp_c_copula(df,smoothing = FALSE)
@@ -192,32 +189,37 @@ emp_check_cop = emp_c_copula(df,smoothing = TRUE,resolution = 20)
 
 ## The Function plot_density:
 <!-- TODO: documentation, we can also plot the mass distr -->
-The function plot_density allows us to visualize copulae by plotting its density.
+The function plot_density allows us to visualize copulae by plotting its density or mass distribution.
 ```{r,echo = FALSE, message=FALSE}
 require(gridExtra)
 ```
 ```{r, echo=TRUE, eval=FALSE}
-plot_density(emp_cop, density=TRUE)
-plot_density(emp_check_cop, density=TRUE)
+plot_density(emp_cop, density=FALSE)
+plot_density(emp_check_cop, density=FALSE)
 ```
 ```{r, echo=FALSE}
-p1 = plot_density(emp_cop, density=TRUE) + theme(aspect.ratio = 1) 
-p2 = plot_density(emp_check_cop, density=TRUE) + theme(aspect.ratio = 1)
+p1 = plot_density(emp_cop, density=FALSE) + theme(aspect.ratio = 1) 
+p2 = plot_density(emp_check_cop, density=FALSE) + theme(aspect.ratio = 1)
 grid.arrange(p1,p2,ncol=2)
 ```
 
 
 ## Exercise 1 - Empirical copula
-<!-- TODO: Is this an actual exercise or an draft? I wouldn't understand what to do -->
-  * Compute the mass distribution of the empirical checkerboard copula
-  
-  * 
 
-  *
-  
-  *
-  
-  *
+Try to calculate the empirical copula -- not the checkerboard one while having the argument *smoothing=TRUE* on. Why does this work in this particular case? 
+
+Try to explain by also plotting the pseudo observations of your generated sample into the mass-plot (also testing your *ggplot* skill a bit here).
+
+Also, try to explain the differences in the following plots:
+```{r, eval=FALSE}
+n=10
+df = data.frame(x = rnorm(n), y = runif(n))
+emp_cop = emp_c_copula(df, smoothing = FALSE)
+emp_check_cop = emp_c_copula(df, smoothing = true, resolution = 20)
+plot_density(emp_cop, density = FALSE)
+plot_density(emp_check_cop, density = FALSE)
+```
+
 
 # Dependence Measure $\zeta_1$
 
@@ -234,12 +236,10 @@ Copula and we want to use this to construct a *dependence measure*.
 
 ## The $\zeta_1$-Measure
 
-Based on a metric $D1$ such a dependency meassure for a copula A can be
+Based on the metric $D1$ such a dependency meassure for a copula A can be
 constructed in the following way:
 $$ \zeta_1(A) := 3\cdot D_1(A,\Pi) \; \in [0,1] $$
-where $\Pi$ is the product copula and the mysterious $D_1$ is, as stated
-before, a metric for copulae. Its construction involves markov kernels
-and we can make due without discussing $D_1$ in detail.
+where $\Pi$ is, again, the product copula.
 
 Dependent copulae are "close" to $\Pi$ and have a low
 $\zeta_1$-dependency measure, while independent copulae are "far" from
@@ -253,8 +253,7 @@ to know "a" degree of dependency between the underlying RVs $X$ and $Y$.
 We already know how to estimate the copula $A$, that describes the
 distribution $F_{(X,Y)}$ and that is the empirical (checkerboard) copula.
 
-We note again, that not any empirical copula will converge to the "true"
-one in the $D_1$ metric, but the empirical checkerboard does converge.
+Now we also see, why using checkerbard copulae is important: We said before, that for the empircal copulae $A_n^B$ of $\Pi$, we have $ D_1(A_n^B,\Pi) \to \infty$. That would mean, that for large $n$, we would estimate $ \zeta_1(A_n^B) \approx 1 $, so a high degree of dependency for what should essentially be the product copula (complete independence).
 
 ## what do we do with that?
 
@@ -284,8 +283,16 @@ df = data.frame(x,y)
 mod = qad(df, print = FALSE, permutation = TRUE, resolution = 15)
 mod$results
 ```
-<!-- Comment: Ich wuerd hier ein Bsp zur ein/beidseitigen Abhaengigkeit einfuegen und dann pairwise/heatmap vorziehen-->
-## Ecercise 2 - qad
+
+## Exercise 2 - qad
+
+If we look at the output of qad, we see a different score for the degree of dependency of $Y$ on $X$ and vice versa.
+
+Why could that be the case? Try to come up with an example of your own to try and explain this *interesting* bit of information.
+
+<!-- Comment: Ich wuerd hier den plot-Teil + BSP zuerst machen, dann pairwise/heatmap und dann erst das RTR Bsp, weil die 2 Fkt. dafuer sehr hilfreich sein koennten-->
+## Ecercise 3 - qad
+
   
   * Download the RTR-dataset 
   
