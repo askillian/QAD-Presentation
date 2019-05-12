@@ -1,7 +1,7 @@
 ---
 title: "Presentation QAD"
 author: "Fabian Oberreiter, Konrad Medicus, Tobias Hilgart"
-date: "24 4 2019"
+date: "13.05.2019"
 output:
   ioslides_presentation:
     toc: true
@@ -16,22 +16,42 @@ library(qad)
 # Introduction
 
 ## Fundamental Definitions
-For a random variable $X$, the cumulative distribution function is given by:
+For a random variable $X$, its cumulative distribution function (CDF) is given by:
 
 $F_X(x)=P(X\leq x)$
 
-For a pair of random variables $X,Y$ the joint cumulative distribution function is given by:
+## Fundamental Definitions
+<!-- CDF-plot of a normal distributed random variable. -->
+```{r,echo=TRUE, fig.height= 4}
+x = seq(-1,1,length=1000)
+y = pnorm(x,0,0.2)
+plot(x, y, type="l", ylab='F(x)')
+```
+
+## Fundamental Definitions
+For a pair of random variables $X,Y$ their joint cumulative distribution function is given by:
 
 $F_{X,Y}(x,y)=P(X\leq x, Y\leq y)$
+<center>
+  ![](img/MultivariateNormalCdfExample_01.png){ width=60% }
+</center>
+
+^[1]https://www.mathworks.com
 
 ## Fundamental Definitions
 For a pair of continous random variables $X,Y$ with a known joint distribution, the marginal probability density function $p_X$ can be defined as:
 
 $p_X(x)=\int_yp_{X,Y}(x,y)dy$ 
 
-## What is a Copula?
-A simple (implicit) definition of a (bivariate) Copula is as follows:
+<center>
+  ![](img/Multivariate_normal_sample.svg.png){ width=50% }
+</center>
 
+^[1]https://upload.wikimedia.org
+
+## What is a Copula?
+A simple (implicit) definition of a (bivariate) copula is as follows:
+<!-- TODO: Should this implicit def stay? -->
 A copula is the joint distribution of two -- on $[0,1]$ -- continous random variables, restricted to $[0,1]^2$
 
 This implies the following two properties, which are also used to define two-dimensional Copulae explicitly:
@@ -46,25 +66,31 @@ A copula is a function $A:[0,1]^2 \to [0,1]$ with the following properties:
 ## Examples of Copulae
 * $M(u,v) = \text{min}\{u,v\}$
 * $W(u,v) = \text{max}\{u+v-1,0\}$
-* $\Pi(u,v) = u \cdot v$
+* $\Pi(u,v) = u \cdot v$   (product copula)
 
 Recall: For independent random variables, the joint distribution is the product of the marginal distributions.
 
+<center>
+  ![](img/ComputeGaussianCopulaCdfExample_01.png){ width=40% }
+</center>
+
+^[1]https://www.mathworks.com
+
 ## The Sklar theorem:
-Let $H$ denote the joint distribution of the random variables $X,Y$. Furhermore, let $X \sim F$ and $Y \sim G$. Then, there exists a Copula $A$, such that for all $x,y \in \mathbb{R}$ we have:
+Let $H$ denote the joint distribution of the random variables $X,Y$. Furhermore, let $X \sim F$ and $Y \sim G$. Then, there exists a copula $A$, such that for all $x,y \in \mathbb{R}$ we have:
 $$ H(x,y) = A(F(x),G(y)) $$
 For continuous $F,G$, the Copula $A$ is unique.
-On the other hand, for every Copula $A$, we get a two-dimensional distribution via $A(F,G)$.
+On the other hand, for every copula $A$, we get a two-dimensional distribution via $A(F,G)$.
 
 So, (two-dimensional) copulae give us the link between two-dimensional distributions and their marginal distributions.
 
 
 ## Empirical Distribution Function
-Given a sample $S$ of size $n$ of a random variables $X$, how would we estimate the underlying distribution of $X$?
+Given a sample $S$ of size $n$ of a random variable $X$, how would we estimate the underlying distribution of $X$?
 
 
 ## Empirical Distribution Function
-Given a sample $S$ of size $n$ of a random variables $X$, how would we estimate the underlying distribution of $X$?
+Given a sample $S$ of size $n$ of a random variable $X$, how would we estimate the underlying distribution of $X$?
 
 The Empirical Distribution Function is defined as:
 $$\hat F_n(x) = \frac{\#\{x_i\in S|x_i\leq x\}}{n}$$
@@ -72,12 +98,18 @@ $$\hat F_n(x) = \frac{\#\{x_i\in S|x_i\leq x\}}{n}$$
 In R, this function can be calculated via the call *ecdf(sample)*
 <!-- In R this can be calculated with the function ecdf(x).  -->
 
+## Exercise 0 - Empirical distribution function
+<!-- TODO optional -->
+
 ## Empirical Copula
-We can try a similar approach with copulae, since the Sklar theorem at least gives us the existence of a copula $A_n$, i.e. $H_n(x,y) = A_n(F_n(x),G_n(y))$.
+We can try a similar approach with copulae, since the Sklar theorem at least gives us the existence of a copula $A_n$, i.e. 
+$H_n(x,y) = A_n(F_n(x),G_n(y))$.
 <!-- So given a sample $S$ of two random variables $X$ and $Y$, we define the Empirical copula as follows: -->
 <!-- $$ \hat C_n(\frac{i}{n},\frac{j}{n}) =  \frac{\#\{(x,y)\in S|\}}{}$$ -->
 
-However, depending on the metric used, we will not get convergence just like that.
+However, depending on the metric used, we will not get convergence just like that. 
+<!-- convergence in what space, what metric? -->
+<!-- TODO: should be clearer explained-->
 
 ## Empirical Copula -- Example
 
@@ -92,6 +124,7 @@ grid.arrange(p1,p2,ncol=2)
 ```
 
 We now take any copula $B$ and shrink it down by $\frac{1}{n}$ -- now it has the size of a single square of the grid. Then we put this shrunk $B$ for each grid square with a pseudo--observation for its upper right corner.
+<!-- TODO: this section should be explained clearer -->
 
 ## Empirical Copula -- Example
 
@@ -106,12 +139,13 @@ This is, how an empirical copula may look like, if we constructed it using the p
 
 ## Checkerbord Copulae:
 We would like to have convergence even in the mysterious $D_1$ metric. 
+<!-- TODO: Definition auf welchem Raum D_1 definiert ist plus was es ca. macht. -->
 
 One problem could be, that the sample size dictates, how many squares actually have mass and that mass is always the same, $\frac{1}{n}\text{mass of }B$ or $0$.
 
 What we could try to do is decoupling the fineness of the grid from the sample size (ensuring, that we still end up with a copula).
 
-An absolutely continous Copula, whose density is constant on the interior of each square of our (refined) $N \times N$ grid, we call $N-$ Checkerboard Copula.
+An absolutely continous copula, which has a constant density on the interior of each square of our (refined) $N \times N$ grid, we call $N-$ Checkerboard Copula.
 <!-- TODO: was ist damit gemeint? -->
 
 ## Example
@@ -124,103 +158,116 @@ plot_density(cop, density = FALSE) + theme(aspect.ratio = 1)
 We started with the same (pseudo-) observations, but achieved smoother transitions between squares with mass / no mass.
 
 
-## emp_c_copula
-The function computes the mass-distribution of the empirical (checkerboard) copula, given a bivariate sample $(x_1,y_1),\dots,(x_n,y_n)$.
-
-function: emp_c_copula($X$,smoothing,resolution)
-
-Arguments:
-
-* $X$: a dataframe with two columns, which contains the bivariate sample. Each row corresponds to one observation
-
-* smoothing: a logical indicating, whether the checkerboard copula is computed. (default = TRUE)
-
-* resolution: an integer indicating the number of vertical/horizontal strips of the checkerboard copula.
-
-
-## emp_c_copula_eval
-Via emp_c_copula_eval($X$,$u$,smoothing,resolution), you can directly evaluate the copula at the designated points $u$
-
-## Example
+## The Function emp_c_copula
+<!-- TODO: No documentation ;explaination-->
+The function emp_c_copula the mass-distribution of the empirical (checkerboard) copula, given a bivariate sample $(x_1,y_1),\dots,(x_n,y_n)$.
 
 ```{r, message=FALSE}
 #install.packages("qad")
 library(qad)
 ```
-
 ```{r}
 n = 200
-X = data.frame(x1 = runif(n,0,1), x2 = runif(n,0,1))
-emp_cop = emp_c_copula(X,smoothing = FALSE)
-emp_check_cop = emp_c_copula(X,smoothing = TRUE,resolution = 20)
+x = runif(n,0,1)
+y = runif(n,0,1) 
+df = data.frame(x,y)
+emp_cop = emp_c_copula(df,smoothing = FALSE)
+emp_check_cop = emp_c_copula(df,smoothing = TRUE,resolution = 20)
 ```
 
-## The function plot_density:
-
-Plots the density/mass of the empirical checkerboard copula.
-
-*plot_density(mass_matrix, density = TRUE)*
-
-Arguments:
-
-* mass_matrix: a squared matrix containing the mass distribution, e.g. output of emp_c_copula()
-
-* density: a logical whether the density or mass is plotted.
-
-
-## Exercise 1
-
-
-
-# Dependence Measure $\zeta_1$
-
-## Motivation
-
-So, Copulae give us information of the dependency between $X$ and $Y$: If they are independent (i.e. information about $X$ does not give us any about $Y$ and vice versa), we already established, that the product Copula $\Pi$ describes exactly that.
-
-On the other hand we could have complete dependence, i.e. knowing $X$ we pretty much know $Y$ and vice versa. Such a property should be reflected in the Copula and we want to use this to construct a *dependence measure*
-
-## The one to measure them all:
-
-A couple of math later, we define said depencence measure for a Copula $A$ to be
-$$ \zeta_1(A) := 3 D_1(A,\Pi) \; \in [0,1] $$
-where $\Pi$ is the product Copula and the mysterious $D_1$ is, as stated before, a metric for Copulae. As it's construction involves markov kernels, we make do without discussing $D_1$ in detail.
-
-We now compare a Copula to $\Pi$, to "complete randomness" so to say. Indeed, in accordance to our intuition, completely dependent Copulae have the highest dependence measure $1$, while $\Pi$ itself has dependence measure $0$.
-
-## That's nice, but what do I do?
-
-Now, we have a sample $(x_1,y_1), \dots, (x_n, y_n)$ and we would like to know "a" degree of dependency between the underlying RV-s $X$ and $Y$.
-
-We already know how to estimate the copula $A$, that describes the distribution $F_{(X,Y)}$ and that is the empirical (checkerboard) copula.
-
-We note again, that the "plain" empirical copula might not neccisarily converge to the "true" one in the $D_1$ metric, where the empirical checkerboard does, so lucky us!
-
-## That means:
-
-So, we calculate the empirical checkerboard copula $A_n$ -- for sufficiently large sample size $n$ a good estimate for $A$. Then we simply estimate the dependency between $X$ and $Y$ as $\zeta_1(A_n)$
-
-That seems like quite a bit of work to do all that by hand, now if only there was a R-function that would spare us the hassle...
-
-## The qad object:
-
-```{r, eval=TRUE}
-n <-100
-x <- runif(n,-1,1)
-y <- abs(x)
-df <- data.frame(x,y)
-q <- qad(df, print = FALSE, permutation = TRUE)
-q$results
+## The Function plot_density:
+The function plot_density allows us to visualize copulae by plotting its density.
+```{r,echo = FALSE, message=FALSE}
+require(gridExtra)
+```
+```{r, echo=TRUE, eval=FALSE}
+plot_density(emp_cop, density=TRUE)
+plot_density(emp_check_cop, density=TRUE)
+```
+```{r, echo=FALSE}
+p1 = plot_density(emp_cop, density=TRUE) + theme(aspect.ratio = 1) 
+p2 = plot_density(emp_check_cop, density=TRUE) + theme(aspect.ratio = 1)
+grid.arrange(p1,p2,ncol=2)
 ```
 
-
-## Exercise 1 - Empirical distribution function
 
 ## Exercise 1 - Empirical copula
 
   * Compute the mass distribution of the empirical checkerboard copula
   
   * 
+
+  *
+  
+  *
+  
+  *
+
+# Dependence Measure $\zeta_1$
+
+## Motivation
+
+Copulae give us information of the dependency between two RVs $X$ and
+$Y$. If they are independent, which means information about $X$ does not
+give us any about $Y$ and vice versa, we already established, that the
+product copula $\Pi$ describes exactly that.
+
+On the other hand we could have complete dependence, i.e. knowing $X$ we
+also know $Y$ and vice versa. Such a property should be reflected in the
+Copula and we want to use this to construct a *dependence measure*.
+
+## The $\zeta_1$-Measure
+
+Based on a metric $D1$ such a dependency meassure for a copula A can be
+constructed in the following way:
+$$ \zeta_1(A) := 3\cdot D_1(A,\Pi) \; \in [0,1] $$
+where $\Pi$ is the product copula and the mysterious $D_1$ is, as stated
+before, a metric for copulae. Its construction involves markov kernels
+and we can make due without discussing $D_1$ in detail.
+
+Dependent copulae are "close" to $\Pi$ and have a low
+$\zeta_1$-dependency measure, while independent copulae are "far" from
+$\Pi$ and thus have a high dependency measure.
+
+## what do we do with that?
+
+Now, we have a sample $(x_1,y_1), \dots, (x_n, y_n)$ and we would like
+to know "a" degree of dependency between the underlying RVs $X$ and $Y$.
+
+We already know how to estimate the copula $A$, that describes the
+distribution $F_{(X,Y)}$ and that is the empirical (checkerboard) copula.
+
+We note again, that not any empirical copula will converge to the "true"
+one in the $D_1$ metric, but the empirical checkerboard does converge.
+
+## what do we do with that?
+
+So, we calculate the empirical checkerboard copula $A_n$, which is a
+good estimate for $A$. Then we simply estimate the dependency between
+$X$ and $Y$ as $\zeta_1(A_n)$
+
+It would be a bit of work to do all that by hand. Luckily there is a
+R-function that will spare us the hassle. 
+
+## The qad object:
+A qad object can be generated with with: 
+```{r, eval=FALSE}
+qad(x)
+```
+where x is a dataframe containing the observations of two univariate/one bivariate sample.
+
+Interesting for us is the qad component *results*, which carries the results of the $\zeta_1$ dependency meassure.
+
+## The qad object:
+Example:
+```{r, eval=TRUE}
+n = 100
+x = runif(n,-1,1)
+y = abs(x)
+df = data.frame(x,y)
+mod = qad(df, print = FALSE, permutation = TRUE, resolution = 15)
+mod$results
+```
 
 ## Ecercise 2 - qad
   
@@ -236,21 +283,31 @@ q$results
   
   * Use summary.qad() to get a closer look at the object
   
+# Methods for qad  
   
-## Methods for qad
-plot.quad:
+## Plot.qad
+Plotting a qad objects visualizes the estimated conditional probabilities for our random variables.
+
+That means: for each strip in the plot we can determine the probability of the dependent variable given the strip in which the conditional variable lies.
+
+We generate a qad object with low resolution and look at the plot:
 ```{r}
-plot(q, addSample = TRUE)
+x = runif(n,-1,1)
+y = abs(x)
+df = data.frame(x,y)
+mod = qad(df, print = FALSE, permutation = TRUE, resolution = 6)
+```  
+## Plot.qad
+```{r}
+plot(mod, addSample = TRUE)
 ```
 
-## Methods for qad
-predict.quad:
-```{r, eval=TRUE}
-#q <- qad(df,resolution = 4, print = FALSE)
-predict(q, values=c(0), conditioned = "x1")
+## predict.qad
+```{r}
+predict(mod, values=c(0), conditioned = "x1")
 ```
 Here, we calculate the probability that for $(x_1,x_2)\sim(X,Y)$, $x_2$ lies in one of the intervalls above, 
-given that $x_1$ lies in the intervall that contains 0.  
+given that $x_1$ lies in the strip that contains $x1=0$.  
 
 ## Exercise 3 - plot
 
@@ -262,8 +319,41 @@ given that $x_1$ lies in the intervall that contains 0.
   
   * What does the copula parameter change in the output?
   
+## pairwise.qad
+Now we have more than 2 RVs and are interested in their dependecies:  
+```{r,echo=FALSE, results="hide"}
+n = 100
+x = runif(n,-1,1)
+y = x^3-x 
+z = runif(n,-1,1)
+df = data.frame(x,y,z)
+mod = pairwise.qad(df, permutation = TRUE)
+```  
+```{r,eval=FALSE}
+n = 100
+x = runif(n,-1,1)
+y = x^3-x 
+z = runif(n,-1,1)
+df = data.frame(x,y,z)
+mod = pairwise.qad(df, permutation = TRUE)
+mod$q
+```  
+```{r,echo=FALSE}
+mod$q
+```
+
+## heatmap.qad
+We can visualize the pairwise dependencies with a heatmap:
+```{r, fig.height = 3}
+heatmap.qad(mod, select = "dependence", 
+                 significance = TRUE, 
+                 sign.level = 0.01)
+```  
+
+
 ## Exercise 4 - 
-  
+
+<!-- TODO Exercise with pairwise and heatmap  -->
   
 
 
@@ -271,4 +361,9 @@ given that $x_1$ lies in the intervall that contains 0.
 
   
   
-  
+## The End
+
+
+<center>
+Thank you for your attention!
+</center>
