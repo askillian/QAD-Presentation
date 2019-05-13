@@ -1,0 +1,101 @@
+---
+title: "Presentation_2dot0"
+author: "Fabian Oberreiter, Konrad Medicus, Tobias Hilgart"
+date: "13 5 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Motivation
+
+Let's take a look at the following bivariate sample:
+
+```{r}
+n = 50
+x = rnorm(n,1,1)
+y = sin(x) 
+plot(x,y)
+```
+which we obtained from $X \sim \mathcal(N)(1,1)$ and $Y = \sin(X)$.
+
+Would it be easier to predict $Y$ given $X$, or $X$ given $Y$?
+
+
+## Motivation cont.
+
+So, we saw how we could have an asymmetrical dependence structure. There are actual examples for that in nature as well:
+
+<!-- Vielleicht finden wir ein anderes Beispiel  --> 
+
+## Motivation cont.
+
+So, why could this be a problem?
+
+How would you usually try to quantify dependence?
+
+Correlation comes to mind.
+
+Let's try it:
+
+```{r, echo=TRUE}
+cor(x,y)
+cor(y,x)
+```
+ 
+
+## Motivation cont.
+We got the same value. Indeed, by the Definition of correlation (or covariance), we will always get $r(X,Y) = r(Y,X)$. The same happens, if we calculated the spearman or kendall correlation instead (same problem).
+
+It seems, that correlation is not applicable to measure asymmetric dependence.
+
+We would like to have a dependency measure, that can also classify asymmetric dependency. How could we go about obtaining/constructing one?
+
+## Motivation cont.
+
+What would we like for such a dependency measure, say *q*?
+
+* $q(X,Y) \in [0,1]$
+
+* $q(X,Y) = 0$ if and only if $X$ and $Y$ are independent (independence)
+
+* $q(X,Y) = 1$ if and only if $Y$ is a function of $X$ (complete dependence)
+
+We want a higher *q(X,Y)*, if there is a higher dependency of $Y$ on $X$. It may well be, that $q(X,Y) \neq q(Y,X)$.
+
+Additionally, scale changes should not affect the outcome.
+
+## Outline of the qad-measure's construction:
+
+# (Empirical) Copula
+<!-- Wirklich sehr kurz und um die Aufgabe 1 uebernehmen zu können  -->
+## emp_c_copula
+## plot_density
+
+## Exercise 1
+
+# The dependency measure $\zeta_1$
+<!-- Das sollten wir in etwa so uebernehmen koennen  --> 
+
+## qad
+## plot.qad
+## predict.qad
+
+## Exercise 2
+<!-- Unsere Aufabe 2 wird aufgrund der Motivation jetzt hinfaellig, wir ziehen am besten 3 vor  --> 
+
+## pairwise
+## heatmap
+
+## Exercise 3
+
+# Testing
+<!-- Sollten wir vermutlich viel ausfuehrlicher machen, vlt eine Aufgabe, den p-Wert zu Fuß auszurechnen?  --> 
+
+## cci
+
+## Exercise 4
+<!-- Vielleicht an RTR Aufgabe anknuepfen, auf Unabhaengikeit testen?  --> 
+
