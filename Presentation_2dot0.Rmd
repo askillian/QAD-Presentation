@@ -36,9 +36,14 @@ Would it be easier to predict $Y$ given $X$, or $X$ given $Y$?
 
 ## Motivation cont.
 
-So, we saw how we could have an asymmetrical dependence structure. There are actual examples for that in nature as well:
+So, we saw how we could have an asymmetrical dependence structure. 
 
-<!-- Vielleicht finden wir ein anderes Beispiel  --> 
+There are plenty of real examples as well:
+
+```{r, message = FALSE, fig.height=3.5}
+# I simply cannot find good ones!
+```
+
 
 ## Motivation cont.
 
@@ -377,8 +382,84 @@ predict(mod, values = 1.42, conditioned = "x1", nr_intervals = 5)
 
 ## Exercise 3
 
+
+  * Create a dummy dataset: n=100 observations of a uniformly distributed random variable and the corresponding square values.
+  
+  * Create a new qad object and use the plot function to visualize the copula.
+  
+  * Add the observations to the plot with the addSample parameter.
+  
+  * Use the predict.qad method and sum up the probabilities for one strip (horizontal or vertical) for one value
+
 ## cci
 
-## Exercise 4
-<!-- Vielleicht an RTR Aufgabe anknuepfen, auf Unabhaengikeit testen?  --> 
+We can use the qad metric to test hypothesis:
+
+cci (conditional confidence interval) provides a confidence interval for independence (for the qad measure). 
+
+Therefore, we can compare the qad-value to the interval boundaries and check if the null hypothesis of independence holds or has to be rejected.
+```{r,echo=FALSE}
+c = cci(n, alternative = "one.sided")[2]
+```
+
+## cci
+
+So, we calculate our boundaries
+
+```{r, echo = TRUE}
+c = cci(n, alternative = "one.sided")[2]
+```
+
+and check, whether our calculated dependence for our example lies in between.
+
+```{r, echo=TRUE, eval = FALSE}
+if(coef(mod, select = 'q(x1,x2)') > c){
+ print(paste('q(x1,x2)','>',c,sep=' '))
+ print('Reject H0')
+}else{
+ print(paste('q(x1,x2)','<=',c,sep=' '))
+ print('Accept H0')
+}
+```
+
+## cci
+
+```{r, fig.height=3.4}
+p0
+```
+
+And indeed, for our example, we reject the hypothesis of independence:
+
+```{r}
+if(coef(mod, select = 'q(x1,x2)') > c){
+ print(paste('q(x1,x2)','>',c,sep=' '))
+ print('Reject H0')
+}else{
+ print(paste('q(x1,x2)','<=',c,sep=' '))
+ print('Accept H0')
+}
+
+```
+
+## cci
+
+```{r, fig.height=3.4}
+p0
+```
+
+Same for the other direction:
+
+```{r}
+if(coef(mod, select = 'q(x2,x1)') > c){
+ print(paste('q(x2,x1)','>',c,sep=' '))
+ print('Reject H0')
+}else{
+ print(paste('q(x2,x1)','<=',c,sep=' '))
+ print('Accept H0')
+}
+
+```
+
+
+## Final Exercise:
 
