@@ -38,10 +38,19 @@ Would it be easier to predict $Y$ given $X$, or $X$ given $Y$?
 
 So, we saw how we could have an asymmetrical dependence structure. 
 
-There are plenty of real examples as well:
+This is not a constructed problem, as the following example shows:
 
 ```{r, message = FALSE, fig.height=3.5}
-# I simply cannot find good ones!
+library(readxl)
+auto_mpg <- read_excel("auto-mpg.xlsx")
+
+# convert to non-retard units
+auto_nr = auto_mpg * 1.609344
+names(auto_nr) = c("kmh", "kml_hs", "kml_f")
+auto_nr$kml_hs = auto_nr$kml_hs/ 3.7854
+
+ggplot(data = auto_nr) + geom_point(aes(x = kmh, y = kml_hs)) +
+  ggtitle("Speed vs Fuel consumption") + xlab("Kilometers per hour") + ylab("Kilometers per Litre")
 ```
 
 
