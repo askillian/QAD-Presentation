@@ -1,0 +1,588 @@
+---
+title: "QAD"
+author: "Fabian Oberreiter, Konrad Medicus, Tobias Hilgart"
+date: "13 5 2019"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(qad)
+library(ggplot2)
+library(gridExtra)
+```
+
+# Motivation  - Asymetric Dependence
+
+## Motivation
+
+Bivariate sample:
+
+```{r, fig.height=3.5}
+set.seed(2019)
+n = 50
+x_ = rnorm(n,1.42,2)
+y_ = sin(x_) 
+X = data.frame(x_,y_)
+
+p0 = ggplot(X, aes(x=x_,y=y_)) + geom_point() + theme_bw()
+p0
+```
+$X \sim \mathcal{N}(1.42,2)$, $Y = \sin(X)$.
+
+Would it be easier to predict $Y$ given $X$, or $X$ given $Y$?
+
+
+## Motivation
+
+<!-- So, we saw how we could have an asymmetrical dependence structure.  -->
+
+<!-- This is not a constructed problem, as the following example shows: -->
+Real life example: Average speed vs. Fuel consumption
+
+```{r, message = FALSE, fig.height=3.5}
+library(readxl)
+auto_mpg <- read_excel("auto-mpg.xlsx")
+
+# convert to non-retard units
+auto_nr = auto_mpg * 1.609344
+names(auto_nr) = c("kmh", "kml_hs", "kml_f")
+auto_nr$kml_hs = auto_nr$kml_hs/ 3.7854
+
+ggplot(data = auto_nr) + geom_point(aes(x = kmh, y = kml_hs)) +
+  ggtitle("Speed vs Fuel consumption") + xlab("Kilometers per hour") + ylab("Kilometers per Litre")
+```
+
+
+## Motivation
+
+What is dependence between random variables $X$ and $Y$?
+
+$X$ ...result of a coin toss,  
+$Y$ ...result of tossing the same coin a second time.  
+-> we do not gain information about $Y$ if we know $X$ and vice versa. 
+
+
+$X$ ...result of drawing a card from a deck containing 2 cards,   
+$Y$ ...result of drawing the remaining card.   
+-> we know everything about $Y$ if we know $X$ and vice versa.   
+
+
+## Motivation
+
+Why could this be a problem?
+
+How would we usually quantify dependence?
+
+## Motivation
+
+Why could this be a problem?
+
+How would we usually quantify dependence?
+
+Correlation coefficient:
+
+```{r, echo=TRUE}
+cor(x_,y_)
+cor(y_,x_)
+```
+ 
+
+## Motivation
+<!-- We got the same value. Indeed, by the Definition of correlation (or covariance), we will always get $r(X,Y) = r(Y,X)$. The same happens, if we calculated the spearman or kendall correlation instead (same problem). -->
+
+<!-- It seems, that correlation is not applicable to measure asymmetric dependence. -->
+
+<!-- We would like to have a dependency measure, that can also classify asymmetric dependency. How could we go about obtaining/constructing one? -->
+
+By definition of correlation (or covariance):
+
+$corr(X,Y) = corr(Y,X)$     
+The same holds true for spearman or kendall correlation.
+
+
+Correlation can NOT be used as a meassure of asymmetric dependence.
+
+
+## Motivation
+
+What properties shouldan asymetric dependency meassure *q* have?
+
+* $q(X,Y) \in [0,1]$
+
+* $q(X,Y) = 0$ iff $X$ and $Y$ are independent
+(independence)
+
+* $q(X,Y) = 1$ iff $Y$ is a function of $X$ 
+(complete dependence)
+
+* It may be, that $q(X,Y) \neq q(Y,X)$.
+
+* Scale changes should not affect the outcome.
+
+## qad-measure - Construction:
+
+* Start with a bivariate sample
+
+* Use the pseudo-observations to construct the empirical copula $E_n$.
+
+* Aggregate $E_n$ to the empirical checkerboard copula $\hat{C_n}$.
+
+* Estimate $q(A) = 3 D_1(A,\Pi)$ via $q(\hat{C_n}) = 3 D_1(\hat{C_n},\Pi)$.
+
+* For sufficiently large $n$, we have $q(\hat{C_n}) \approx q(A)$.
+
+# (Empirical) Copula
+
+## Idea
+
+We have something that links univariate and bivariate distributions and contains all the information about mutual dependency:   
+Copula (lat. link").
+
+It's existance is guranteed by Sklar's Theorem, therefore it makes sense to and use it for a dependency measure.
+
+How do we get this copula from a given bivariate sample?
+
+## Empirical copula
+
+```{r, message = FALSE, fig.height= 3.5}
+set.seed(2019)
+x = rnorm(8)
+y = runif(8)
+require(gridExtra)
+p1 = qplot(x,y) + theme_bw() + theme(aspect.ratio = 1)
+p2 = qplot(ecdf(x)(x),ecdf(y)(y)) + theme_bw() + theme(aspect.ratio = 1) + xlim(0,1) + ylim(0,1)
+grid.arrange(p1,p2,ncol=2)
+```
+
+similarly to the empirical distribution:
+
+We start with a sample $(x_1, y_1), \dots, (x_n, y_n)$ and the pseudo - observations (normalized ranks).
+
+## Empirical copula
+
+```{r, fig.height=3.5}
+df = data.frame(x,y)
+emp_cop = emp_c_copula(df, smoothing=FALSE)
+plot_density(emp_cop, density = FALSE)+ theme_bw() + theme(aspect.ratio = 1) + xlim(0,1) + ylim(0,1) +
+  geom_point(data = data.frame(x=ecdf(x)(x), y=ecdf(y)(y)), aes(x=x,y=y)) + ggtitle("Empirical Copula")
+```
+
+And then proceed to construct an empirical copula as shown above.
+
+## Empirical copula of our example
+
+Let's compute the empirical copula for our example:
+
+```{r, fig.height=4}
+emp_cop = emp_c_copula(X, smoothing = FALSE)
+p3 = plot_density(emp_cop, density = FALSE)+ theme_bw() + theme(aspect.ratio = 1) + xlim(0,1) + ylim(0,1) + ggtitle("Empirical Copula")
+
+grid.arrange(p0,p3,ncol=2)
+```
+
+
+## Limitations
+
+We would wish that the empirical copula $E_n$ was a good estimate for the true underlying copula $A$. 
+
+Using the aforementioned metric $D_1$, this is not always the case.
+
+We need to use a different estimator for $A$.
+
+## Empirical checkerboard copula
+
+We aggregate the empirical copula into what we call empirical checkerboard copula.
+
+```{r, message=FALSE}
+check_cop = emp_c_copula(X, smoothing = TRUE, resolution = 8)
+p4 = plot_density(check_cop, density = FALSE)+ theme_bw() + theme(aspect.ratio = 1) + xlim(0,1) + ylim(0,1)
+
+p3_new = p3 + theme(panel.grid.minor = element_line(colour = "red"),panel.grid.major = element_line(colour="red"))+
+  scale_x_continuous(minor_breaks  = seq(0,1,0.125)) +
+  scale_y_continuous(minor_breaks = seq(0,1,0.125))
+
+grid.arrange(p3_new,p4,ncol=2)
+```
+
+Now, not only does the checkerboard copula $\hat{C_n}$ have nice analytical properties, it also is a good estimate for $A$ in our metric $D_1$, so $D_1(\hat{C_n},A) \approx 0$ for sufficiently large $n$.
+
+## emp_c_copula()
+
+The function *emp_c_copula* computes the mass-distribution of the empirical (checkerboard) copula, given a bivariate sample.
+
+Arguments:
+
+* X: a dataframe containing a bivariate sample
+
+* smoothing: a logical indication whether the checkerboard copula is to be calculated
+
+* resolution: an integer indicating the resolution of the checkerboard aggregation (the number of breaks in the grid)
+
+
+## emp_c_copula()
+
+The function emp_c_copula computes the mass-distribution of the empirical (checkerboard) copula, given a bivariate sample $(x_1,y_1),\dots,(x_n,y_n)$.
+
+```{r, message=FALSE}
+#install.packages("qad")
+library(qad)
+```
+```{r}
+n = 15
+x = rnorm(n,0,1)
+y = runif(n,0,1) 
+df = data.frame(x,y)
+emp_cop = emp_c_copula(df,smoothing = FALSE)
+emp_check_cop = emp_c_copula(df,smoothing = TRUE,resolution = 20)
+```
+
+## plot_density()
+
+The function *plot_density* plots the density/mass of the empirical (checkerboard) copula.
+
+Arguments:
+
+* mass_matrix: A squared matrix containing the mass distribution (output of emp_c_copula())
+
+* density: A logical indication whether density or mass is plotted
+
+
+## plot_density()
+
+The function plot_density allows us to visualize copulae:
+```{r,echo = FALSE, message=FALSE}
+require(gridExtra)
+```
+```{r, echo=TRUE, eval=FALSE}
+plot_density(emp_cop, density=FALSE)
+plot_density(emp_check_cop, density=FALSE)
+```
+```{r, echo=FALSE}
+p1 = plot_density(emp_cop, density=FALSE) + theme(aspect.ratio = 1) 
+p2 = plot_density(emp_check_cop, density=FALSE) + theme(aspect.ratio = 1)
+grid.arrange(p1,p2,ncol=2)
+```
+
+
+## Exercise 1
+<!-- TODO make it easier -->
+Calculate the empirical copula -- not the checkerboard copula -- while having the argument *smoothing=TRUE*. (Hint: Resolution parameter)
+
+Optional: Visualize this by plotting the pseudo observations of your generated sample into the mass-plot (Compare: slide 12,13).
+
+Explain the differences in the following plots:
+```{r, eval=FALSE, echo=TRUE}
+n=10
+df = data.frame(x = rnorm(n), y = runif(n))
+emp_cop = emp_c_copula(df, smoothing = FALSE)
+emp_check_cop = emp_c_copula(df, smoothing = TRUE, resolution = 20)
+plot_density(emp_cop, density = FALSE)
+plot_density(emp_check_cop, density = FALSE)
+```
+
+```{r, include = FALSE}
+#solution: (set include = TRUE to run code)
+n = 10
+x = rnorm(n)
+y = runif(n)
+df = data.frame(x,y)
+
+EC = emp_c_copula(df, smoothing=TRUE, resolution = n)
+p = plot_density(EC,density = FALSE)
+
+df_2 = data.frame(x_ = ecdf(x)(x), y_ = ecdf(y)(y))
+p = p + geom_point(data = df_2, aes(x=x_,y=y_))
+p
+# works because of the same resolution as sample size, the "aggregation grid" is the same as the one obtained from the pseudo-observations, the one we used for the empirical copula.
+
+# the difference is the 4-times finer grid that splits each square into 4 equal parts. On first look, one cannot tell the differnece and the scale seems wrong.
+```
+
+
+# The dependency measure
+
+## The dependency measure
+
+Based on a metric $D_1$ for copulae, a dependency measure can be
+constructed in the following way:
+$$ q(A) := 3\cdot D_1(A,\Pi) \; \in [0,1] $$
+$\Pi$ denotes the product copula, which stems from two completely independet RVs.
+
+In a way, we measure the "distance" to complete independece.
+
+## qad()
+
+The function *qad* quantifies the asymmetric dependence of two RVs $X$ and $Y$. It achieves this by calculating the empirical checkerboard copula to estimate the dependency measure $q$.
+
+Arguments:
+
+* X: a dataframe containing a bivariate sample in two columns.
+
+* resolution: resolution of the emp. copula
+
+* premutation: a logical indicating, whether a permutated $p$-value is computed.
+
+
+## qad()
+
+If you run a permutation $p$ test, you can indicate the number of permutation runs (nperm) and whether you want it to be computed in parallel (DoParallel) using multiple cores.
+
+There are multiple ways to see the results of the qad calculation:   
+
+ * summary(qad(X))
+ * coef(qad(X))
+ * qad(X)$results
+
+
+## qad Example 1
+
+Back to our initial example:
+
+```{r}
+p0
+```
+
+
+## qad Example 1
+
+We take a look at the mutual dependencies.
+
+```{r, echo=TRUE}
+mod = qad(X, print = FALSE)
+coef(mod, select = c("q(x1,x2)","q(x1,x2)","mean.dependence",
+                     "asymmetry"))
+```
+
+We see that $X$ predicts $Y$ better than $Y$ predicts $X$.
+
+## qad Example 2
+
+```{r, eval=TRUE}
+n = 200
+x2 = runif(n,-2,4)
+y2 = exp(x2)
+df = data.frame(x2,y2)
+model = qad(df, print = FALSE, permutation = TRUE)
+model$results
+```
+
+
+## pairwise.qad
+
+With the function *pairwise.qad*, we can apply the *qad* function on each pair of columns of the given dataframe. Other arguments are the same as for *qad*.
+
+```{r, echo=TRUE, message=FALSE}
+n = 1000
+x = runif(n,0,1)
+y = x^2+rnorm(n,0,1)
+z = runif(n,0,1)
+df = data.frame(x,y,z)
+
+model = pairwise.qad(df, permutation = TRUE, nperm = 10,
+                     DoParallel = TRUE)
+```
+
+## heatmap.qad
+
+We can plot the results as a heatmap:
+
+```{r, echo=TRUE, fig.height=3.5}
+heatmap.qad(model, select = "dependence", fontsize = 8,
+            significance = TRUE)
+
+```
+
+## heatmap.qad
+
+Arguments:
+
+* pw_qad: the output of the function *pairwise.qad()*
+
+* select: dependence value to be plotted: "dependence", "mean.dependence" or "asymmetry"
+
+* significance: logical; if p-values were calculated, marks the significant dependency values with a star
+
+* sign.level: manually set significance level (default: 0.05)
+
+
+## Exercise 2
+  
+  * Download the RTR-dataset
+  
+    (via load(url("http://www.trutschnig.net/RTR.RData")) )
+  
+    and sample 1000 observations.
+  
+  * Examine which columns could have interesting dependencies.
+  
+  * This does not makes sense for all columns. (why?)
+
+  * Visualize the dependencies for the relevant columns. Argue, why you chose them.
+  
+```{r, eval=FALSE, echo = FALSE, include=FALSE}
+  load(url("http://www.trutschnig.net/RTR.RData"))
+  df = RTR[sample(nrow(RTR),1000),c('long','lat','rtr_speed_dl','rtr_speed_ul')]
+  model = pairwise.qad(df)
+  heatmap.qad(model)
+``` 
+
+## plot.qad
+
+<!-- Plots conditional probabilities for each strip of the checkerboard copula in the copula setting, or the retransformed data setting. -->
+
+```{r, eval=FALSE, echo=TRUE}
+plot(mod, addSample = TRUE, copula = TRUE)
+
+```
+```{r, fig.height=4}
+p5 = plot(mod, addSample = TRUE)
+p6 = plot(mod, addSample = TRUE, copula = TRUE)
+
+p6
+```
+
+## plot.qad
+
+<!-- Plots conditional probabilities for each strip of the checkerboard copula in the copula setting, or the retransformed data setting. -->
+
+```{r, eval=FALSE, echo=TRUE}
+plot(mod, addSample = TRUE)
+
+```
+```{r, fig.height=4}
+p5
+```
+
+## predict.qad
+
+The function *predict.qad()* predicts the probabilities to end up in specific intervals given $x$ or $y$ values. 
+
+The prediciton can be computed in the copula or the retransformed data setting.
+
+```{r, echo=TRUE}
+predict(mod, values = 1.42, conditioned = "x1", nr_intervals = 5)
+```
+
+
+## Exercise 3
+
+
+  * Create a dummy dataset: n = 100 observations of a uniformly distributed random variable and the corresponding square values.
+  
+  * Create a new qad object and use the plot function to visualize the copula.
+  
+  * Add the observations to the plot with the addSample parameter.
+  
+  * Use the predict.qad method and sum up the probabilities for one strip (horizontal or vertical) for one value.
+
+## cci - Conditional Confidence Interval
+
+We can also use the qad metric to test hypothesis:
+
+cci provides a confidence interval for independence (for the qad measure). 
+
+We can compare the qad-value to the interval boundaries and check if the null hypothesis of independence holds or has to be rejected.
+```{r,echo=FALSE}
+c = cci(n, alternative = "one.sided")
+```
+
+## cci
+
+We calculate our boundaries
+
+```{r, echo = TRUE}
+c = cci(n, alternative = "one.sided")
+```
+
+and check, whether the calculated dependence for our example lies between them.
+
+```{r, echo=TRUE, eval = FALSE}
+if(coef(mod, select = 'q(x1,x2)') %in% c){
+ print('Accept H0')
+}else{
+ print('Reject H0')
+}
+```
+
+## cci
+
+```{r, fig.height=3.4}
+p0
+```
+
+And indeed, for our example, we reject the hypothesis of independence:
+
+```{r}
+if(coef(mod, select = 'q(x1,x2)') %in% c){
+ print(paste('q(x1,x2)','in [',c[1],', ', c[2], ']',sep=' '))
+ print('Accept H0')
+}else{
+ print(paste('q(x1,x2)','not in [',c[1],',', c[2], ']',sep=' '))
+ print('Reject H0')
+}
+
+```
+
+## cci
+
+```{r, fig.height=3.4}
+p0
+```
+
+Similarly for the other direction:
+
+```{r}
+if(coef(mod, select = 'q(x2,x1)') %in% c){
+ print(paste('q(x2,x1)','in [',c[1],', ', c[2], ']',sep=' '))
+ print('Accept H0')
+}else{
+ print(paste('q(x2,x1)','not in [',c[1],',', c[2], ']',sep=' '))
+ print('Reject H0')
+}
+
+```
+
+
+## Final Exercise 4:
+
+Take a look at the *attitude* dataset:
+
+Find out the two sets with the highest (one sided) dependency. Provide respective plots.
+
+Are those dependencies symmetric? Argue by providing p-values for asymmetry (hint: do not to calculate the p-values for all pairs, only the chosen two)
+
+Reject or Accept the hypothesis of independence for your chosen pairs.
+
+```{r, include = FALSE}
+#solution:
+model = pairwise.qad(attitude)
+heatmap.qad(model)
+
+#pairs are (complaints, raises) and (ratings, complaints)
+
+ggplot(data = data.frame(attitude)) + geom_point(aes(x = complaints, y = raises))
+ggplot(data = data.frame(attitude)) + geom_point(aes(x = rating, y = complaints))
+
+m1 = qad(attitude$complaints, attitude$raises, permutation = TRUE, nperm = 10)
+summary(m1)
+
+m2 = qad(attitude$rating, attitude$complaints, permutation = TRUE, nperm = 10)
+summary(m2)
+
+c = cci(30)
+
+if(coef(m1, select = 'q(x1,x2)') %in% c){
+  print('Accept H0')
+}else{
+  print('Reject H0')
+}
+
+if(coef(m2, select = 'q(x1,x2)') %in% c){
+  print('Accept H0')
+}else{
+  print('Reject H0')
+}
+```
+
