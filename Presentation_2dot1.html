@@ -3385,8 +3385,7 @@ y = x^2+rnorm(n,0,1)
 z = runif(n,0,1)
 df = data.frame(x,y,z)
 
-model = pairwise.qad(df, permutation = TRUE, nperm = 10,
-                     DoParallel = TRUE)</pre>
+model = pairwise.qad(df, permutation = TRUE)</pre>
 
 <pre >## [1] &quot;Process...&quot;
 ## [1] &quot;Process: 1 / 3&quot;
@@ -3421,8 +3420,8 @@ model = pairwise.qad(df, permutation = TRUE, nperm = 10,
 
 <p>and sample 1000 observations.</p></li>
 <li><p>Examine which columns could have interesting dependencies.</p></li>
-<li><p>This does not makes sense for all columns. (why?)</p></li>
-<li><p>Visualize the dependencies for the relevant columns. Argue, why you chose them.</p></li>
+<li><p>Why does this not make sense for all columns?</p></li>
+<li><p>Visualize the dependencies for the relevant columns. Justify why you chose them.</p></li>
 </ul>
 
 </article></slide><slide class=""><hgroup><h2>plot.qad</h2></hgroup><article  id="plot.qad">
@@ -3505,7 +3504,7 @@ model = pairwise.qad(df, permutation = TRUE, nperm = 10,
 
 <p>Take a look at the <em>attitude</em> dataset:</p>
 
-<p>Find out the two sets with the highest (one sided) dependency. Provide respective plots.</p>
+<p>Find out the two attributes with the highest (one sided) dependency. Provide respective plots.</p>
 
 <p>Are those dependencies symmetric? Argue by providing p-values for asymmetry (hint: do not to calculate the p-values for all pairs, only the chosen two)</p>
 
