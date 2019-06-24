@@ -1,0 +1,122 @@
+\documentclass{scrartcl}
+\author{Medicus,Oberreiter,Hilgart}
+
+\usepackage{babel,amsmath, amsthm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+}
+
+\begin{document}
+
+\title{QAD-Package}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+The \textit{"Quantification of Asymmetric Dependence"} package introduces a copula-based dependency measure capable of detecting and depicting asymmetry.
+
+It does so, by constructing the empirical copula from a given bivariate sample and aggregating it to the smooth empirical checkerboard copula, which is used as a strongly consistent estimate for the dependency measure used.
+
+\section{qad}
+
+\subsection{Description}
+
+Quantifies the (asymmetric) dependence structure between two random variables $X$ and $Y$.
+
+\subsection{Arguments}
+qad(x,\dots)
+
+\begin{itemize}
+  \item $x$: either a data.frame containing columns of observations of two random variables or a vector containing the observations of one.
+  \item $y$: if $x$ is not a data.frame of two columns, a vector containing the observations of the second random variable.
+  \item $resolution$: an integer indicating the number of strips for the checkerboard aggregation. Default = NULL uses the optimal resolution.
+  \item $permutation$: a logical indicating whether a permutated p-value is computed.
+  \item $nperm$: an integer indicating the number of permutation runs.
+\end{itemize}
+
+\subsection{Value}
+qad returns an object of class qad containing the following components:
+
+\begin{itemize}
+  \item $data$: a data.frame containing the input data.
+  \item $results$: a data.frame containing the results of the dependence measures.
+  \item $mass\textunderscore matrix$: a matrix containing the mass distribution of the empirical checkerboard copula.
+  \item $resolution$: an integer containing the used resolution of the checkerboard aggregation.
+\end{itemize}
+
+\subsection{Examples}
+<<echo=FALSE,message=FALSE>>=
+library(qad)
+@
+
+<<>>=
+n = 200
+x = runif(n,-2,4)
+y = sin(x^2)
+df = data.frame(x,y)
+model = qad(df, print = FALSE, permutation = TRUE)
+model$results
+@
+
+\section{pairwise.qad}
+Computes the function qad() for each pair of columns in the given data frame and returns a list of corresponding qad objects.
+
+\section{heatmap.qad}
+The pairwise computated dependency measure as output from the pairwise.qad() function, are illustrated by a heatmap.
+
+\subsection{Arguments}
+
+\begin{itemize}
+  \item $pw\textunderscore qad$: output of the function pairwise.qad().
+  \item $select$: a character indicating which dependence value is plotted. Options are c("dependence","mean.dependence", "asymmetry").
+  \item $fontsize$: a numeric specifying the font size of the values.
+  \item $significance$: a logical indicating whether significant values - with respect to the permutatedp.values - are marked with a star.
+  \item $sign.level$: numeric value indicating the significance level.
+  \item $scale$: character indicating whether the heatmap uses a relative or absolute scale.  Op-tions are "rel" or "abs" (default).
+\end{itemize}
+
+\subsection{Example}
+<<warning=FALSE,fig.height=3>>=
+  load(url("http://www.trutschnig.net/RTR.RData"))
+  df = RTR[sample(nrow(RTR),1000),
+           c('long','lat','rtr_speed_dl','rtr_speed_ul')]
+  model = pairwise.qad(df)
+  heatmap.qad(model)
+@
+
+\section{cci}
+
+An approximated confidence interval for the dependence measure qad(x,y) for independent random variables . cci() can thus be used to test for independence
+
+\subsection{Arguments}
+
+\begin{itemize}
+  \item $n$: and integer indicating the sample size
+  \item $alternative$: character string, whether a "one.sided" (default), or "two.sided" confidence intervall is constructed.
+\end{itemize}
+
+\subsection{Example}
+
+<<>>=
+c = cci(n, alternative = "one.sided")
+  
+x = runif(n,-2,4)
+y = sin(x^2)
+df = data.frame(x,y)
+model = qad(df,print=FALSE)
+  
+if(coef(model, select = 'q(x1,x2)') %in% c){
+ print('Accept H0')
+}else{
+ print('Reject H0')
+}
+@
+
+
+\end{document}
