@@ -1,8 +1,11 @@
 ---
 title: "QAD"
 author: "Fabian Oberreiter, Konrad Medicus, Tobias Hilgart"
-date: "13 5 2019"
-output: ioslides_presentation
+date: "17.06.2019"
+output:
+  beamer_presentation: default
+  slidy_presentation: default
+  ioslides_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -223,14 +226,14 @@ Arguments:
 
 ## emp_c_copula()
 
-The function emp_c_copula computes the mass-distribution of the empirical (checkerboard) copula, given a bivariate sample $(x_1,y_1),\dots,(x_n,y_n)$.
+The function *emp_c_copula* computes the mass-distribution of the empirical (checkerboard) copula, given a bivariate sample.
 
 ```{r, message=FALSE}
 #install.packages("qad")
 library(qad)
 ```
-```{r}
-n = 15
+```{r, echo= TRUE}
+n = 50
 x = rnorm(n,0,1)
 y = runif(n,0,1) 
 df = data.frame(x,y)
@@ -267,10 +270,9 @@ grid.arrange(p1,p2,ncol=2)
 
 
 ## Exercise 1
-<!-- TODO make it easier -->
 Calculate the empirical copula -- not the checkerboard copula -- while having the argument *smoothing=TRUE*. (Hint: Resolution parameter)
 
-Optional: Visualize this by plotting the pseudo observations of your generated sample into the mass-plot (Compare: slide 12,13).
+Optional: Visualize this by plotting the pseudo observations of your generated sample into the mass-plot (Compare: slide 13,14).
 
 Explain the differences in the following plots:
 ```{r, eval=FALSE, echo=TRUE}
@@ -327,7 +329,9 @@ Arguments:
 
 ## qad()
 
-If you run a permutation $p$ test, you can indicate the number of permutation runs (nperm) and whether you want it to be computed in parallel (DoParallel) using multiple cores.
+
+The function *qad* quantifies the asymmetric dependence of two RVs $X$ and $Y$. It achieves this by calculating the empirical checkerboard copula to estimate the dependency measure $q$.
+<!-- If you run a permutation $p$ test, you can indicate the number of permutation runs (nperm) and whether you want it to be computed in parallel (DoParallel) using multiple cores. -->
 
 There are multiple ways to see the results of the qad calculation:   
 
@@ -351,7 +355,7 @@ We take a look at the mutual dependencies.
 
 ```{r, echo=TRUE}
 mod = qad(X, print = FALSE)
-coef(mod, select = c("q(x1,x2)","q(x1,x2)","mean.dependence",
+coef(mod, select = c("q(x1,x2)","q(x2,x1)","mean.dependence",
                      "asymmetry"))
 ```
 
@@ -359,7 +363,7 @@ We see that $X$ predicts $Y$ better than $Y$ predicts $X$.
 
 ## qad Example 2
 
-```{r, eval=TRUE}
+```{r, eval=TRUE,echo = TRUE}
 n = 200
 x2 = runif(n,-2,4)
 y2 = exp(x2)
@@ -380,8 +384,7 @@ y = x^2+rnorm(n,0,1)
 z = runif(n,0,1)
 df = data.frame(x,y,z)
 
-model = pairwise.qad(df, permutation = TRUE, nperm = 10,
-                     DoParallel = TRUE)
+model = pairwise.qad(df, permutation = TRUE)
 ```
 
 ## heatmap.qad
@@ -417,9 +420,9 @@ Arguments:
   
   * Examine which columns could have interesting dependencies.
   
-  * This does not makes sense for all columns. (why?)
+  * Why does this not make sense for all columns?
 
-  * Visualize the dependencies for the relevant columns. Argue, why you chose them.
+  * Visualize the dependencies for the relevant columns. Justify why you chose them.
   
 ```{r, eval=FALSE, echo = FALSE, include=FALSE}
   load(url("http://www.trutschnig.net/RTR.RData"))
@@ -549,7 +552,7 @@ if(coef(mod, select = 'q(x2,x1)') %in% c){
 
 Take a look at the *attitude* dataset:
 
-Find out the two sets with the highest (one sided) dependency. Provide respective plots.
+Find out the two attributes with the highest (one sided) dependency. Provide respective plots.
 
 Are those dependencies symmetric? Argue by providing p-values for asymmetry (hint: do not to calculate the p-values for all pairs, only the chosen two)
 
