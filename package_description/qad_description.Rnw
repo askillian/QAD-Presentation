@@ -1,5 +1,5 @@
 \documentclass{scrartcl}
-\author{Medicus,Oberreiter,Hilgart}
+\author{Konrad Medicus, Fabian Oberreiter,Tobias Hilgart}
 
 \usepackage{babel,amsmath, amsthm}
 \usepackage{hyperref}
@@ -21,37 +21,22 @@
 
 The \textit{"Quantification of Asymmetric Dependence"} package introduces a copula-based dependency measure capable of detecting and depicting asymmetry.
 
-It does so, by constructing the empirical copula from a given bivariate sample and aggregating it to the smooth empirical checkerboard copula, which is used as a strongly consistent estimate for the dependency measure used.
+Dependency measures such as the various correlations are not applicable to measure asymmetric dependence. Using copulae, which describe the joint distribution of a random vector $(X,Y)$ one can 'measure' the distance of a given copula to independence (dependency measure $\zeta_1$, Trutschnig 2011, note) and fullfill all requirements for an asymmetric dependency measure, such as invariant under scale changes, 1 iff $Y$ is a function of $X$, 0 iff independent etc.
+
+However, when one works with samples -- observations $(x_1,y_1),\dots,(x_n,y_n)$ -- the true distribution they are drawn from is generally unknown, and so is the copula then.
+
+Thus there is a need to find a 'good estimate' for said copula in the sense, that it gives a good estimate of the dependency measure.
+
+However, in said measure, the 'known' approximation called \textit{empirical copula} (corresponds to empirical distribution) does not provide a good estimate.
+
+This package introduces a 'smooth aggregation' of the empirical copula, called \textit{empirical checkerboard copula}, that does provide a good estimates and enables the user to estimate the (asymmetric) dependence from a sample by using it.
 
 \section{qad}
 
-\subsection{Description}
+The qad -- function does exactly that: From a given data.frame containing a bivariate sample -- on column per variable-- it calculates the empirical checkerboard copula and computes the dependency measure, thus quantifying the asymmetric dependence (qad) of two random variables $X$ and $Y$.
 
-Quantifies the (asymmetric) dependence structure between two random variables $X$ and $Y$.
-
-\subsection{Arguments}
-qad(x,\dots)
-
-\begin{itemize}
-  \item $x$: either a data.frame containing columns of observations of two random variables or a vector containing the observations of one.
-  \item $y$: if $x$ is not a data.frame of two columns, a vector containing the observations of the second random variable.
-  \item $resolution$: an integer indicating the number of strips for the checkerboard aggregation. Default = NULL uses the optimal resolution.
-  \item $permutation$: a logical indicating whether a permutated p-value is computed.
-  \item $nperm$: an integer indicating the number of permutation runs.
-\end{itemize}
-
-\subsection{Value}
-qad returns an object of class qad containing the following components:
-
-\begin{itemize}
-  \item $data$: a data.frame containing the input data.
-  \item $results$: a data.frame containing the results of the dependence measures.
-  \item $mass\textunderscore matrix$: a matrix containing the mass distribution of the empirical checkerboard copula.
-  \item $resolution$: an integer containing the used resolution of the checkerboard aggregation.
-\end{itemize}
-
-\subsection{Examples}
-<<echo=FALSE,message=FALSE>>=
+\subsection{Example I}
+<<echo=FALSE,message=FALSE, warning=FALSE>>=
 library(qad)
 @
 
@@ -64,24 +49,9 @@ model = qad(df, print = FALSE, permutation = TRUE)
 model$results
 @
 
-\section{pairwise.qad}
-Computes the function qad() for each pair of columns in the given data frame and returns a list of corresponding qad objects.
+A permutated p-test can be performed to test for independence. The summary function can also be called on qad-objects. With pairwise.qad, one can calculate the qad for each pair of columns in a given data.frame, and heatmap.qad visualizes the results.
 
-\section{heatmap.qad}
-The pairwise computated dependency measure as output from the pairwise.qad() function, are illustrated by a heatmap.
-
-\subsection{Arguments}
-
-\begin{itemize}
-  \item $pw\textunderscore qad$: output of the function pairwise.qad().
-  \item $select$: a character indicating which dependence value is plotted. Options are c("dependence","mean.dependence", "asymmetry").
-  \item $fontsize$: a numeric specifying the font size of the values.
-  \item $significance$: a logical indicating whether significant values - with respect to the permutatedp.values - are marked with a star.
-  \item $sign.level$: numeric value indicating the significance level.
-  \item $scale$: character indicating whether the heatmap uses a relative or absolute scale.  Op-tions are "rel" or "abs" (default).
-\end{itemize}
-
-\subsection{Example}
+\subsection{Example II}
 <<warning=FALSE,fig.height=3>>=
   load(url("http://www.trutschnig.net/RTR.RData"))
   df = RTR[sample(nrow(RTR),1000),
@@ -92,16 +62,7 @@ The pairwise computated dependency measure as output from the pairwise.qad() fun
 
 \section{cci}
 
-An approximated confidence interval for the dependence measure qad(x,y) for independent random variables . cci() can thus be used to test for independence
-
-\subsection{Arguments}
-
-\begin{itemize}
-  \item $n$: and integer indicating the sample size
-  \item $alternative$: character string, whether a "one.sided" (default), or "two.sided" confidence intervall is constructed.
-\end{itemize}
-
-\subsection{Example}
+Gives a confidence intervall, depending on the sample size, for the qad measure of two independent random variables. Thus, it can be used to test for independence.
 
 <<>>=
 c = cci(n, alternative = "one.sided")
@@ -116,6 +77,37 @@ if(coef(model, select = 'q(x1,x2)') %in% c){
 }else{
  print('Reject H0')
 }
+@
+
+\section{the rest \\ plot/predict/emp\_ c\_ copula/plot\_ density}
+
+If one desires to calculate just the empirical copula (smoothing=FALSE) or the checkerboard aggregation (smoothing=TRUE), one can do so by plugging the data.frame(x,y) into the emp\_ c\_ copula() -- function. The resulting mass/density matrix can be plotted via plot\_ density.
+
+Alternatively, calling the plot -- function on a qad-object directly plots it's mass matrix (from the checkerboard aggregation), one can also add the sample points and retransform from the copula into the original data setting.
+
+Using the conditional probabilities, with the predict command on a qad-object, one gets the probabilities to land in certain intervals, given either certain $x$ or $y$ values (after specifying which are given). One can manually set the number of intervals, into which the range of the other RV is splitted.
+
+\subsection{Example I}
+<<fig.height=4>>=
+set.seed(2019)
+x = rnorm(50,1,2)
+y = x^2 + rnorm(50,0,1)
+df = data.frame(x,y)
+
+ECC = emp_c_copula(df, resolution = 7)
+plot_density(ECC,density=FALSE)
+@
+
+<<fig.height=4>>=
+model = qad(df,print=FALSE)
+plot(model, copula = TRUE)
+@
+
+
+\subsection{Example II}
+<<>>=
+predict(model, values = c(-1,0,1,2,3), conditioned = "x1",
+        nr_intervals = 5)
 @
 
 
