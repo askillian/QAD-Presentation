@@ -49,7 +49,7 @@
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}
-\author{Konrad Medicus, Fabian Oberreiter,Tobias Hilgart}
+\author{Konrad Medicus, Fabian Oberreiter, Tobias Hilgart}
 
 \usepackage{babel,amsmath, amsthm}
 \usepackage{hyperref}
@@ -68,22 +68,22 @@
 \section{Introduction}
 
 The QAD-\textit{'Quantification of Asymmetric Dependence'} package introduces a copula-based dependency measure capable of detecting and depicting asymmetry.\\
-Dependency measures such as the various correlations are not applicable to measure asymmetric dependence. Using copulae one can 'measure' the distance of a given copula to independence (dependency measure $\zeta_1$; Trutschnig, 2011) and fulfill all requirements for an asymmetric dependency measure, such as invariant under scale changes, 1 iff $Y$ is a function of $X$, 0 iff independent etc.\\
-However, when one works with samples -- observations $(x_1,y_1),\dots,(x_n,y_n)$ -- the true distribution they are drawn from is generally unknown, and so is the underlying copula.\\
-Thus there is a need to find a 'good estimate' for said copula in the sense, that it gives a good estimate of the dependency measure.\\
-However, in said measure, the 'known' approximation called \textit{empirical copula} does not provide a good estimate. This is why the package introduces a 'smooth aggregation' of the empirical copula, called \textit{empirical checkerboard copula}, that does provide a good estimates and enables the user to estimate the (asymmetric) dependence from a sample by computing it.
+Dependency measures such as the various correlations are not applicable to measure asymmetric dependence. Using copulae, one can 'measure' the distance of a given copula to independence (dependency measure $\zeta_1$; Trutschnig, 2011) and fulfill all requirements for an asymmetric dependency measure, such as invariant under scale changes, 1 iff $Y$ is a function of $X$, 0 iff independent etc.\\
+However, when one works with samples -- observations $(x_1,y_1),\dots,(x_n,y_n)$ -- the true distribution they are drawn from is generally not known, and neither is the underlying copula.\\
+Thus there is a need to find a 'good estimate' for said copula in the sense, that it approximates the dependency measure well.\\
+However, in said measure, the 'known' approximation called \textit{empirical copula} does not provide a good estimate. This is why the package introduces a 'smooth aggregation' of the empirical copula, called \textit{empirical checkerboard copula}, that does provide a good estimate and enables the user to approximate the asymmetric dependence from a sample by computing it.
 
 \section{Background}
-The mathematics behind the QAD-package cover parts of basic statistics as well as new research done in the field. The following is supposed to give a very general idea of the mathematics used behind the QAD-package and is not detailing the construction of the underlying objects and functions.\\\\
+The following is supposed to give a very general idea of the mathematics used behind the QAD-package and is not detailing the construction of the underlying objects and functions.\\\\
 A (two dimensional) copula is a distribution function from $[0,1]^2 \to [0,1]$ which has uniform marginal distributions. Sklar's theorem states that for any pair of random variables, there exists a copula that can map the values of the individual (marginal) distributions back to the value of the joint distribution. Thus, copulae connect the marginal distributions to the joint distribution. 
-Similarly to the empirical distribution function, we can approximate the underlying copula with the empirical copula. As a mere aggregation does not result in some desired convergence properties, the empirical checkerboard copula (introduced in Griessenberger, 2018) is computed, which does satisfy these properties. 
+Similarly to the empirical distribution function, we can approximate the underlying copula of a bivariate sample with the empirical copula. As a mere aggregation does not result in some desired convergence properties, the empirical checkerboard copula (introduced in Griessenberger, 2018) is computed, which does satisfy these properties. 
 This empirical checkerboard copula is then used to calculate a 'distance' (the $D_1$-metric; introduced in Trutschnig, 2011) to the product copula, which is the copula corresponding to two independent random variables, and thereby the dependence is measured.
-Due to the computation process not being symmetrical, the two dependence values do not have to be the equal - there can be an asymmetry in the data -- the difference of these values is the asymmetry measure
+Due to the computation process not being symmetrical, the two dependence values do not have to be the equal -- there can be an asymmetry in the data -- the difference of these values is the asymmetry measure.
 
 \section{qad}
 
-The qad-function does exactly that: From a given data frame containing a bivariate sample, on column per variable, it calculates the empirical checkerboard copula and computes the dependency measure, thus quantifying the asymmetric dependence of two random variables $X$ and $Y$.\\
-In the example below, we calculate the dependence between a sample drawn from uniform distributed random variable $X$ and the sine of this sample $Y$. We expect $Y$ to be strongly dependent on $X$ and less so the other way around. This is because $Y$ is directly computed from $X$ using a non-bijective function.
+The qad-function does exactly what has been described above: From a given data frame containing a bivariate sample, one column per variable, it calculates the empirical checkerboard copula and the dependency measure, thus quantifying the asymmetric dependence of two random variables $X$ and $Y$.\\
+In the example below, we calculate the dependence between a sample drawn from uniformly distributed random variable $X$ and the sine of that sample, which we call $Y$. We expect $Y$ to be strongly dependent on $X$ and less so the other way around. This is because $Y$ is directly computed from $X$, while computing $X$ from $Y$ is not possible in this case.
 
 \subsection{Example I}
 
@@ -100,21 +100,21 @@ In the example below, we calculate the dependence between a sample drawn from un
 \end{alltt}
 \begin{verbatim}
 ##                        coef p.values
-## 1        q(x1,x2) 0.7263205      0.0
-## 2        q(x2,x1) 0.2269512      0.1
-## 3 mean.dependence 0.4766358      0.0
-## 4 asymmetry       0.4993693      0.0
+## 1        q(x1,x2) 0.7263205     0.00
+## 2        q(x2,x1) 0.2269512     0.23
+## 3 mean.dependence 0.4766358     0.00
+## 4 asymmetry       0.4993693     0.00
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
 \noindent
-Indeed, we see that $q(x1,x2)$, meassuring how dependent $Y$ is on $X$, is much higher than $q(x2,x1)$. This is a simple example of two asymmetrically dependet random variables.\\\\
-A permutated p-test can be performed to test for independence, as has been done in the example above. In this case, with a significance level of 5\%, we have to reject the nullhypothesis of independence for $q(x1,x2)$, but cannot do so for $q(x2,x1)$.\\
+Indeed, we see that $q(x1,x2)$, measuring how dependent $Y$ is on $X$, is much higher than $q(x2,x1)$. This is a simple example of two asymmetrically dependet random variables.\\\\
+A permutated p-test can be performed to test for independence, as has been done in the example above. In this case, with a significance level of 5\%, we have to reject the null hypothesis of independence for $q(x1,x2)$, but cannot do so for $q(x2,x1)$.\\
 Such a permutated p-test is computed in the following way: From the original two samples $x_1,\ldots,x_n$ and $y_1,\ldots,y_n$, we take the doubled sample\\ $(x_1,y_1),\ldots,(x_n,y_n),(y_1,x_1),\ldots(y_n,x_n)$. From it we draw $n$ observations, calculate the qad value and check wether the calculated value is at least as big as the one of the original sample. We repeat this a number $R$ amount of times (R can be set with the argument nperm) and the fraction of runs where this is the case is our p-value.\\
-To view the results of the qad-function one can use summary function on a qad-object. With pairwise.qad, one can calculate the qad-value for each pair of columns in a given data frame. The function Heatmap.qad visualizes these results nicely.
+To view the results of the qad-function, one can use the summary function on a qad-object. With pairwise.qad, one can calculate the qad-value for each pair of columns in a given data frame. The function heatmap.qad visualizes these results nicely.
 
 \subsection{Example II}
-This small example illustrates how pairwise.qad can be used to look for pairwise dependencies in a multivariat sample. We use the attitude data set, which shows the proportion of favourable responses to each of 7 questions for employees in 30 departments. We calculate the qad values and corresponding p-values. Significant result are marked with \textit{*} in the heatmap.
+This small example illustrates how pairwise.qad can be used to look for pairwise dependencies in a multivariate sample. We use the attitude data set, which shows the proportion of favourable responses to each of 7 questions for employees in 30 departments. We calculate the qad values and corresponding p-values. Significant result are marked with \textit{*} in the heatmap.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
@@ -136,19 +136,22 @@ This small example illustrates how pairwise.qad can be used to look for pairwise
 
 \section{cci}
 
-cci (conditional confidence interval) provides a confidence interval, conditional on the sample size, for the qad-measure of two independent random variables. Thus it can be used to test for independence. The default significance level is 95\% and one-sided as well as two sided tests can be performed.
+cci (conditional confidence interval) provides a confidence interval, conditional on the sample size, for the qad-measure of two independent random variables. Thus it can be used to test for independence. The default significance level is 95\% and one-sided as well as two-sided tests can be performed.
 
+\subsection{Example III}
+The following code illustrates how a one sided hyptothesis test can be done, using cci. Here we calculate our qad-object and check wether the value
+of the dependency meassure is within the bounds calculated by cci. If it is not, we have to reject the hypothesis of independence.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlstd{c} \hlkwb{=} \hlkwd{cci}\hlstd{(n,} \hlkwc{alternative} \hlstd{=} \hlstr{"one.sided"}\hlstd{)}
 
-\hlstd{x} \hlkwb{=} \hlkwd{runif}\hlstd{(n,}\hlopt{-}\hlnum{2}\hlstd{,}\hlnum{4}\hlstd{)}
-\hlstd{y} \hlkwb{=} \hlkwd{sin}\hlstd{(x}\hlopt{^}\hlnum{2}\hlstd{)}
+\hlstd{x} \hlkwb{=} \hlkwd{runif}\hlstd{(n,}\hlnum{0}\hlstd{,}\hlnum{20}\hlstd{)}
+\hlstd{y} \hlkwb{=} \hlkwd{sin}\hlstd{(x)}
 \hlstd{df} \hlkwb{=} \hlkwd{data.frame}\hlstd{(x,y)}
 \hlstd{model} \hlkwb{=} \hlkwd{qad}\hlstd{(df,}\hlkwc{print}\hlstd{=}\hlnum{FALSE}\hlstd{)}
 
-\hlkwa{if}\hlstd{(}\hlkwd{coef}\hlstd{(model,} \hlkwc{select} \hlstd{=} \hlstr{'q(x1,x2)'}\hlstd{)} \hlopt{%in%} \hlstd{c)\{}
+\hlkwa{if}\hlstd{(}\hlkwd{coef}\hlstd{(model,} \hlkwc{select} \hlstd{=} \hlstr{'q(x1,x2)'}\hlstd{)} \hlopt{<} \hlstd{c[}\hlnum{2}\hlstd{])\{}
  \hlkwd{print}\hlstd{(}\hlstr{'Accept H0'}\hlstd{)}
 \hlstd{\}}\hlkwa{else}\hlstd{\{}
  \hlkwd{print}\hlstd{(}\hlstr{'Reject H0'}\hlstd{)}
@@ -162,43 +165,41 @@ cci (conditional confidence interval) provides a confidence interval, conditiona
 
 \section{Additional Functionalty}
 
-If one desires to calculate just the empirical copula (smoothing=FALSE) or the checkerboard aggregation (smoothing=TRUE), one can do so by plugging data frame with bivariate sample into the emp\_ c\_ copula()-function. The resulting mass/density matrix can be plotted via plot\_ density.\\
-Alternatively, calling the plot-function on a qad-object directly plots its mass matrix (from the checkerboard aggregation), one can also add the sample points and retransform from the copula into the original data setting.\\
-Using the conditional probabilities, with the predict command on a qad-object, one gets the probabilities to land in certain intervals, given either certain $x$ or $y$ values (after specifying which are given). One can manually set the number of intervals, into which the range of the other random variable is splitted.
+If we want to calculate just the empirical copula (smoothing=FALSE) or the checkerboard aggregation (smoothing=TRUE), we can do so by plugging a data frame with a bivariate sample into the emp\_ c\_ copula()-function. The resulting mass/density matrix can be plotted using plot\_ density.\\
+Alternatively, calling the plot-function on a qad-object directly plots its mass matrix (coming from the checkerboard aggregation). We can also add the sample points and retransform them from the copula into the original data setting.\\
+Using the conditional probabilities, with the predict command on a qad-object, one gets the probabilities to land in certain intervals, given either certain $x$ or $y$ values.
 
-\subsection{Example III}
-In this example we call plot() on a qad model. This visualizes the empirical checkerboard copula used to calculate the dependency meassure. The value of the blue rectangle in the plot give as an estimation of the conditional probability resulting in a value in the y-range of the rectangle, given that the x-value lies in the x-range.
+\subsection{Example IV}
+In this example we call plot() on a qad model. This visualizes the empirical checkerboard copula used to calculate the dependency meassure. The values of the blue rectangles in the plot give us an estimation of the conditional probability resulting in a value in the y-range of the rectangle, given that the x-value lies in the x-range.
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{set.seed}\hlstd{(}\hlnum{2017}\hlstd{)}
 \hlstd{x} \hlkwb{=} \hlkwd{rnorm}\hlstd{(}\hlnum{50}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{)}
 \hlstd{y} \hlkwb{=} \hlstd{x}\hlopt{^}\hlnum{2} \hlopt{+} \hlkwd{rnorm}\hlstd{(}\hlnum{50}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{)}
 \hlstd{df} \hlkwb{=} \hlkwd{data.frame}\hlstd{(x,y)}
-
 \hlstd{model} \hlkwb{=} \hlkwd{qad}\hlstd{(df,}\hlkwc{print}\hlstd{=}\hlnum{FALSE}\hlstd{)}
 \hlkwd{plot}\hlstd{(model,} \hlkwc{copula} \hlstd{=} \hlnum{FALSE}\hlstd{)}
 \end{alltt}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/unnamed-chunk-7-1} 
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-8-1} 
 
 \end{knitrout}
 
-\subsection{Example IV}
-The next example shows the call and output of the predict function. It shows the conditional probabilities to end up with $y$-value in the listed intervals for all the given values (-1 to 3).
+\subsection{Example V}
+The next example shows the call and output of the predict function. It shows the conditional probabilities to end up with $y$-value in the listed intervals for all the given values (-1 to 2).
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlkwd{predict}\hlstd{(model,} \hlkwc{values} \hlstd{=} \hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{1}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{,}\hlnum{3}\hlstd{),} \hlkwc{conditioned} \hlstd{=} \hlstr{"x1"}\hlstd{,}
+\hlkwd{predict}\hlstd{(model,} \hlkwc{values} \hlstd{=} \hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{1}\hlstd{,}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{,}\hlnum{2}\hlstd{),} \hlkwc{conditioned} \hlstd{=} \hlstr{"x1"}\hlstd{,}
         \hlkwc{nr_intervals} \hlstd{=} \hlnum{5}\hlstd{)}
 \end{alltt}
 \begin{verbatim}
 ##    (-2.46,-0.1] (-0.1,1.85] (1.85,3.98] (3.98,10.22] (10.22,52.96]
-## -1        0.496       0.456       0.048        0.000         0.000
-## 0         0.676       0.324       0.000        0.000         0.000
-## 1         0.220       0.336       0.332        0.112         0.000
-## 2         0.000       0.000       0.696        0.304         0.000
-## 3         0.000       0.000       0.028        0.616         0.356
+## -1        0.496       0.456       0.048        0.000             0
+## 0         0.676       0.324       0.000        0.000             0
+## 1         0.220       0.336       0.332        0.112             0
+## 2         0.000       0.000       0.696        0.304             0
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
