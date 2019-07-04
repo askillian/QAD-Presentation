@@ -1,35 +1,36 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6840 64-bit) (preloaded format=pdflatex 2018.9.30)  2 JUL 2019 13:29
+This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6840 64-bit) (preloaded format=xelatex 2018.12.10)  5 JUL 2019 00:30
 entering extended mode
 **./qad_description.tex
 (qad_description.tex
 LaTeX2e <2018-04-01> patch level 5
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrar
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrar
 tcl.cls"
-Document Class: scrartcl 2018/03/30 v3.25 KOMA-Script document class (article)
+Document Class: scrartcl 2019/02/01 v3.26b KOMA-Script document class (article)
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrkb
+
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrkb
 ase.sty"
-Package: scrkbase 2018/03/30 v3.25 KOMA-Script package (KOMA-Script-dependent b
-asics and keyval usage)
-
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrba
-se.sty"
-Package: scrbase 2018/03/30 v3.25 KOMA-Script package (KOMA-Script-independent 
+Package: scrkbase 2019/02/01 v3.26b KOMA-Script package (KOMA-Script-dependent 
 basics and keyval usage)
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.s
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrba
+se.sty"
+Package: scrbase 2019/02/01 v3.26b KOMA-Script package (KOMA-Script-independent
+ basics and keyval usage)
+
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.s
 ty"
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrlf
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrlf
 ile.sty"
-Package: scrlfile 2018/03/30 v3.25 KOMA-Script package (loading files)
+Package: scrlfile 2019/02/01 v3.26b KOMA-Script package (loading files)
 )))
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\tocba
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\tocba
 sic.sty"
-Package: tocbasic 2018/03/30 v3.25 KOMA-Script package (handling toc-files)
+Package: tocbasic 2019/02/01 v3.26b KOMA-Script package (handling toc-files)
 \scr@dte@tocline@numberwidth=\skip41
 \scr@dte@tocline@numbox=\box26
 )
@@ -37,17 +38,17 @@ Package tocbasic Info: omitting babel extension for `toc'
 (tocbasic)             because of feature `nobabel' available
 (tocbasic)             for `toc' on input line 134.
 Class scrartcl Info: File `scrsize11pt.clo' used instead of
-(scrartcl)           file `scrsize11.clo' to setup font sizes on input line 211
-4.
+(scrartcl)           file `scrsize11.clo' to setup font sizes on input line 216
+2.
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrsi
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrsi
 ze11pt.clo"
-File: scrsize11pt.clo 2018/03/30 v3.25 KOMA-Script font size class option (11pt
+File: scrsize11pt.clo 2019/02/01 v3.26b KOMA-Script font size class option (11p
+t)
 )
-)
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\typea
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\typea
 rea.sty"
-Package: typearea 2018/03/30 v3.25 KOMA-Script package (type area)
+Package: typearea 2019/02/01 v3.26b KOMA-Script package (type area)
 \ta@bcor=\skip42
 \ta@div=\count80
 \ta@hblk=\skip43
@@ -70,7 +71,7 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \topskip        = 11.0pt
 (typearea)              \footskip       = 47.6pt
 (typearea)              \baselineskip   = 13.6pt
-(typearea)              on input line 1706.
+(typearea)              on input line 1715.
 )
 \c@part=\count81
 \c@section=\count82
@@ -78,64 +79,86 @@ Package typearea Info: These are the values describing the layout:
 \c@subsubsection=\count84
 \c@paragraph=\count85
 \c@subparagraph=\count86
-\scr@dte@part@maxnumwidth=\skip47
-\scr@dte@section@maxnumwidth=\skip48
+\scr@dte@section@maxnumwidth=\skip47
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\section on input line 4489.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\section on input line 4489.
+\scr@dte@part@maxnumwidth=\skip48
+Class scrartcl Info: using compatibility default `afterindent=false'
+(scrartcl)           for `\part on input line 4497.
 \scr@dte@subsection@maxnumwidth=\skip49
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subsection on input line 4507.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subsection on input line 4507.
 \scr@dte@subsubsection@maxnumwidth=\skip50
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subsubsection on input line 4517.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subsubsection on input line 4517.
 \scr@dte@paragraph@maxnumwidth=\skip51
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\paragraph on input line 4527.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\paragraph on input line 4527.
 \scr@dte@subparagraph@maxnumwidth=\skip52
+Class scrartcl Info: using compatibility default `runin=bysign'
+(scrartcl)           for `\subparagraph on input line 4537.
+Class scrartcl Info: using compatibility default `afterindent=bysign'
+(scrartcl)           for `\subparagraph on input line 4537.
 \abovecaptionskip=\skip53
 \belowcaptionskip=\skip54
 \c@pti@nb@sid@b@x=\box27
-\scr@dte@figure@maxnumwidth=\skip55
 Package tocbasic Info: omitting babel extension for `lof'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lof' on input line 5439.
+(tocbasic)             for `lof' on input line 5781.
+\scr@dte@figure@maxnumwidth=\skip55
 \c@figure=\count87
-\scr@dte@table@maxnumwidth=\skip56
 Package tocbasic Info: omitting babel extension for `lot'
 (tocbasic)             because of feature `nobabel' available
-(tocbasic)             for `lot' on input line 5451.
+(tocbasic)             for `lot' on input line 5793.
+\scr@dte@table@maxnumwidth=\skip56
 \c@table=\count88
-Class scrartcl Info: Redefining `\numberline' on input line 5615.
+Class scrartcl Info: Redefining `\numberline' on input line 5957.
 \bibindent=\dimen102
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx
 .sty"
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphics
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphics
 .sty"
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.sty
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.sty
 "
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\grap
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\grap
 hics.cfg"
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 99.
+Package graphics Info: Driver file: xetex.def on input line 99.
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-def\pdft
-ex.def"
-File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-def\xete
+x.def"
+File: xetex.def 2017/06/24 v5.0h Graphics/color driver for xetex
 ))
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\color.st
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\color.st
 y"
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\colo
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\colo
 r.cfg"
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package color Info: Driver file: pdftex.def on input line 147.
+Package color Info: Driver file: xetex.def on input line 147.
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\framed\framed.sty
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\framed\framed.sty
 "
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip57
@@ -143,63 +166,65 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \fb@frh=\dimen106
 \FrameRule=\dimen107
 \FrameSep=\dimen108
-) ("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\alltt.sty"
+) ("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\alltt.sty"
 Package: alltt 1997/06/16 v2.0g defines alltt environment
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.sty
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.sty
 "
 Package: babel 2018/09/26 3.24 The Babel package
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\switch.de
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\switch.de
 f"
 File: switch.def 2018/09/26 3.24 Babel switching mechanism
 )
 *************************************
 * Local config file bblopts.cfg used
 *
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\arabi\bblopts.cfg
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\arabi\bblopts.cfg
 "
 File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
  babel
 )
 Package babel Info: You haven't specified a language. I'll use 'nil'
 (babel)             as the main language. Reported on input line 489.
- ("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\nil.ldf"
+ ("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\nil.ldf"
 Language: nil 2018/09/26 3.24 Nil language
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.def
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.def
 "
 File: babel.def 2018/09/26 3.24 Babel common definitions
 \babel@savecnt=\count89
 \U@D=\dimen109
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\txtbabel.
-def")
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\xebabel.d
+ef"
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\txtbabel.
+def"))
 \bbl@dirlevel=\count90
 )))
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsmath.s
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsmath.s
 ty"
 Package: amsmath 2017/09/02 v2.17a AMS math features
 \@mathmargin=\skip58
 
 For additional information on amsmath, use the `?' option.
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amstext.s
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amstext.s
 ty"
 Package: amstext 2000/06/29 v2.01 AMS text
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsgen.st
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsgen.st
 y"
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks15
 \ex@=\dimen110
 ))
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsbsy.st
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsbsy.st
 y"
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen111
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.st
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.st
 y"
 Package: amsopn 2016/03/08 v2.02 operator names
 )
@@ -241,7 +266,7 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
 "
 Package: amsthm 2017/10/31 v2.20.4
 \thm@style=\toks20
@@ -254,16 +279,16 @@ Package: amsthm 2017/10/31 v2.20.4
 \thm@headsep=\skip63
 \dth@everypar=\toks25
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hyperref
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hyperref
 .sty"
-Package: hyperref 2018/02/06 v6.86b Hypertext links for LaTeX
+Package: hyperref 2018/09/30 v6.88a Hypertext links for LaTeX
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub
 -hyperref.sty"
 Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
 
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub
 -generic.sty"
 Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
@@ -285,9 +310,10 @@ Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: pdfTeX >= 1.30 not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
+Package pdftexcmds Info: \pdfdraftmode not found.
 Package: pdfescape 2016/05/16 v1.14 Implements pdfTeX's escape features (HO)
 Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO
 )
@@ -304,15 +330,15 @@ Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
 Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
 Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifxetex
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifxetex
 .sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\auxhook.
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\auxhook.
 sty"
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvoption
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvoption
 s.sty"
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
@@ -320,57 +346,68 @@ Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 \Hy@linkcounter=\count103
 \Hy@pagecounter=\count104
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\pd1enc.d
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\pd1enc.d
 ef"
-File: pd1enc.def 2018/02/06 v6.86b Hyperref: PDFDocEncoding definition (HO)
-Now handling font encoding PD1 ...
-... no UTF-8 mapping file for font encoding PD1
+File: pd1enc.def 2018/09/30 v6.88a Hyperref: PDFDocEncoding definition (HO)
 )
 \Hy@SavedSpaceFactor=\count105
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\hyperref
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\hyperref
 .cfg"
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Hyper figures OFF on input line 4509.
-Package hyperref Info: Link nesting OFF on input line 4514.
-Package hyperref Info: Hyper index ON on input line 4517.
-Package hyperref Info: Plain pages OFF on input line 4524.
-Package hyperref Info: Backreferencing OFF on input line 4529.
+Package hyperref Info: Hyper figures OFF on input line 4535.
+Package hyperref Info: Link nesting OFF on input line 4540.
+Package hyperref Info: Hyper index ON on input line 4543.
+Package hyperref Info: Plain pages OFF on input line 4550.
+Package hyperref Info: Backreferencing OFF on input line 4555.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4762.
+Package hyperref Info: Bookmarks ON on input line 4788.
 \c@Hy@tempcnt=\count106
- ("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty"
+ ("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty"
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 5115.
+LaTeX Info: Redefining \url on input line 5141.
 \XeTeXLinkMargin=\dimen120
 \Fld@menulength=\count107
 \Field@Width=\dimen121
 \Fld@charsize=\dimen122
-Package hyperref Info: Hyper figures OFF on input line 6369.
-Package hyperref Info: Link nesting OFF on input line 6374.
-Package hyperref Info: Hyper index ON on input line 6377.
-Package hyperref Info: backreferencing OFF on input line 6384.
-Package hyperref Info: Link coloring OFF on input line 6389.
-Package hyperref Info: Link coloring with OCG OFF on input line 6394.
-Package hyperref Info: PDF/A mode OFF on input line 6399.
-LaTeX Info: Redefining \ref on input line 6439.
-LaTeX Info: Redefining \pageref on input line 6443.
+Package hyperref Info: Hyper figures OFF on input line 6396.
+Package hyperref Info: Link nesting OFF on input line 6401.
+Package hyperref Info: Hyper index ON on input line 6404.
+Package hyperref Info: backreferencing OFF on input line 6411.
+Package hyperref Info: Link coloring OFF on input line 6416.
+Package hyperref Info: Link coloring with OCG OFF on input line 6421.
+Package hyperref Info: PDF/A mode OFF on input line 6426.
+LaTeX Info: Redefining \ref on input line 6466.
+LaTeX Info: Redefining \pageref on input line 6470.
 \Hy@abspage=\count108
 \c@Item=\count109
 \c@Hfootnote=\count110
 )
-Package hyperref Info: Driver (autodetected): hpdftex.
+Package hyperref Info: Driver (autodetected): hxetex.
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hpdftex.
-def"
-File: hpdftex.def 2018/02/06 v6.86b Hyperref driver for pdfTeX
-\Fld@listcount=\count111
-\c@bookmark@seq@number=\count112
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hxetex.d
+ef"
+File: hxetex.def 2018/09/30 v6.88a Hyperref driver for XeTeX
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\rerunfil
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\puenc.de
+f"
+File: puenc.def 2018/09/30 v6.88a Hyperref: PDF Unicode definition (HO)
+)
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\string
+enc.sty"
+Package: stringenc 2016/05/16 v1.11 Convert strings between diff. encodings (HO
+)
+)
+\pdfm@box=\box30
+\c@Hy@AnnotLevel=\count111
+\HyField@AnnotCount=\count112
+\Fld@listcount=\count113
+\c@bookmark@seq@number=\count114
+
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\rerunfil
 echeck.sty"
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
@@ -380,11 +417,93 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 60.
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\upquote\upquote.s
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\upquote\upquote.s
 ty"
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
-) (qad_description.aux)
+
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\textcomp.sty
+"
+Package: textcomp 2017/04/05 v2.0i Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
+ ("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1enc.def"
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)
+LaTeX Info: Redefining \oldstylenums on input line 334.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 349.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 350.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 351.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 352.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 353.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 354.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 355.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 356.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 357.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 358.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 359.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 360.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 361.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 362.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 363.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 364.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 365.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 366.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 367.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 368.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 369.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 370.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 371.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 372.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 373.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 374.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 375.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 376.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 377.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 378.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 379.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 380.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 381.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 382.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 383.
+Package textcomp Info: Setting lmtt sub-encoding to TS1/0 on input line 384.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 385.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 386.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 387.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 388.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 389.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 390.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 391.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 392.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 393.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 394.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 395.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 396.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 397.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 398.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 399.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 400.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 401.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 402.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 403.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 404.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 405.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
+)) (qad_description.aux)
 \openout1 = `qad_description.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
@@ -395,55 +514,35 @@ LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
 LaTeX Font Info:    ... okay on input line 62.
 LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
 LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
 LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
 LaTeX Font Info:    ... okay on input line 62.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
 LaTeX Font Info:    ... okay on input line 62.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 62.
 LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 62.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 62.
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.m
-kii"
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count113
-\scratchdimen=\dimen123
-\scratchbox=\box30
-\nofMPsegments=\count114
-\nofMParguments=\count115
-\everyMPshowfont=\toks26
-\MPscratchCnt=\count116
-\MPscratchDim=\dimen124
-\MPnumerator=\count117
-\makeMPintoPDFobject=\count118
-\everyMPtoPDFconversion=\toks27
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
+File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf
--base.sty"
-Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
-
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\grfext.s
-ty"
-Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
-)
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
-38.
-Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 456.
-)
+LaTeX Font Info:    ... okay on input line 62.
 \AtBeginShipoutBox=\box31
 Package hyperref Info: Link coloring ON on input line 62.
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.
 sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
-("C:\Users\Tobias\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\gettit
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\gettit
 lestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count119
+\c@section@level=\count115
 )
 LaTeX Info: Redefining \ref on input line 62.
 LaTeX Info: Redefining \pageref on input line 62.
@@ -452,119 +551,95 @@ LaTeX Info: Redefining \nameref on input line 62.
 \@outlinefile=\write3
 \openout3 = `qad_description.out'.
 
+Class scrartcl Info: loading recommended package `bookmark'.
+(scrartcl)           Using `bookmark' together with `hyperref' is recommended,
+(scrartcl)           because of handling of possible bookmark level gaps.
+(scrartcl)           You can avoid loading `bookmark' with KOMA-Script option
+(scrartcl)           `bookmarkpackage=false' before \begin{document} and
+(scrartcl)           you can avoid this message with `\usepackage{bookmark}'
+(scrartcl)           before \begin{document} on input line 62.
 
-(qad_description.toc)
-\tf@toc=\write4
-\openout4 = `qad_description.toc'.
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\bookmark
+.sty"
+Package: bookmark 2016/05/17 v1.26 PDF bookmarks (HO)
 
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\bkm-dvip
+dfm.def"
+File: bkm-dvipdfm.def 2016/05/17 v1.26 bookmark driver for dvipdfm (HO)
+\BKM@id=\count116
+))
+("C:\Users\Konrad\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\se-asc
+ii-print.def"
+File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 
-Overfull \hbox (15.87582pt too wide) in paragraph at lines 80--81
-[]\OT1/cmr/m/n/10.95 However, in said measure, the 'known' approximation called
- \OT1/cmr/m/it/10.95 empirical copula \OT1/cmr/m/n/10.95 (corresponds
+)
+Underfull \hbox (badness 10000) in paragraph at lines 77--82
+
  []
 
 
-Overfull \hbox (2.61392pt too wide) in paragraph at lines 82--83
-[]\OT1/cmr/m/n/10.95 This package introduces a 'smooth aggregation' of the empi
-rical copula, called \OT1/cmr/m/it/10.95 empirical
+Overfull \hbox (0.48775pt too wide) in paragraph at lines 77--82
+\TU/lmr/m/n/10.95 checkerboard copula (introduced in Griessenberger, 2018) is c
+omputed, which does satisfy
  []
 
 [1
 
 
-{C:/Users/Tobias/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+]
 Package color Info: Redefining color shadecolor on input line 92.
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 95.
-Package color Info: Redefining color shadecolor on input line 115.
-<figure/unnamed-chunk-3-1.pdf, id=65, 505.89pt x 216.81pt>
-File: figure/unnamed-chunk-3-1.pdf Graphic file (type pdf)
-<use figure/unnamed-chunk-3-1.pdf>
-Package pdftex.def Info: figure/unnamed-chunk-3-1.pdf  used on input line 132.
-(pdftex.def)             Requested size: 418.25555pt x 179.2542pt.
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 95.
 
-Overfull \hbox (10.95003pt too wide) in paragraph at lines 132--133
-[][] 
+Underfull \hbox (badness 10000) in paragraph at lines 110--115
+
  []
 
 [2]
-Package color Info: Redefining color shadecolor on input line 141.
-LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 150
-.
- (C:/PROGRA~1/R/R-35~1.1/share/texmf/tex/latex\omscmtt.fd
-File: omscmtt.fd 
-)
-LaTeX Font Info:    Font shape `OMS/cmtt/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 150.
+Package color Info: Redefining color shadecolor on input line 119.
 
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 162.
-
-
-Overfull \hbox (14.81628pt too wide) in paragraph at lines 164--165
-\OT1/cmr/m/n/10.95 If one desires to calculate just the empirical copula (smoot
-hing=FALSE) or the checkerboard
+Overfull \hbox (17.9158pt too wide) in paragraph at lines 117--119
+\TU/lmr/m/n/10.95 This small example illustrates how pairwise.qad can be used t
+o look for pairwise dependencies
  []
 
-[3 <./figure/unnamed-chunk-3-1.pdf>]
-Package color Info: Redefining color shadecolor on input line 172.
-<figure/unnamed-chunk-5-1.pdf, id=82, 505.89pt x 289.08pt>
+Package color Info: Redefining color shadecolor on input line 132.
 File: figure/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use figure/unnamed-chunk-5-1.pdf>
-Package pdftex.def Info: figure/unnamed-chunk-5-1.pdf  used on input line 183.
-(pdftex.def)             Requested size: 418.25555pt x 239.0056pt.
 
-Overfull \hbox (10.95003pt too wide) in paragraph at lines 183--184
+Overfull \hbox (10.95pt too wide) in paragraph at lines 133--134
 [][] 
  []
 
-Package color Info: Redefining color shadecolor on input line 188.
-<figure/unnamed-chunk-6-1.pdf, id=83, 505.89pt x 289.08pt>
-File: figure/unnamed-chunk-6-1.pdf Graphic file (type pdf)
-<use figure/unnamed-chunk-6-1.pdf>
-Package pdftex.def Info: figure/unnamed-chunk-6-1.pdf  used on input line 194.
-(pdftex.def)             Requested size: 418.25555pt x 239.0056pt.
-
-Overfull \hbox (10.95003pt too wide) in paragraph at lines 194--195
-[][] 
+Package color Info: Redefining color shadecolor on input line 142.
+[3]
+Overfull \hbox (14.82669pt too wide) in paragraph at lines 165--168
+\TU/lmr/m/n/10.95 If one desires to calculate just the empirical copula (smooth
+ing=FALSE) or the checkerboard
  []
 
-[4 <./figure/unnamed-chunk-5-1.pdf>]
-Package color Info: Redefining color shadecolor on input line 201.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 218.
- [5 <./figure/unnamed-chunk-6-1.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 218.
-
-(qad_description.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 218.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 218.
+Package color Info: Redefining color shadecolor on input line 172.
+[4]
+File: figure/unnamed-chunk-7-1.pdf Graphic file (type pdf)
+<use figure/unnamed-chunk-7-1.pdf>
+Package color Info: Redefining color shadecolor on input line 190.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 212.
+ [5]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 212.
+ (qad_description.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 212.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 212.
 Package rerunfilecheck Info: File `qad_description.out' has not changed.
-(rerunfilecheck)             Checksum: AA5DD63CB3D7AD440433C51433725DF8;463.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 218.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 212.
  ) 
 Here is how much of TeX's memory you used:
- 8383 strings out of 492970
- 136936 string characters out of 3126150
- 334035 words of memory out of 3000000
- 12150 multiletter control sequences out of 15000+200000
- 10412 words of font info for 38 fonts, out of 3000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 41i,7n,51p,9163b,337s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/Tobias/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmmi10.pfb><C:/Users/Tobias/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
-public/amsfonts/cm/cmmi8.pfb><C:/Users/Tobias/AppData/Local/Programs/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Tobias/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Tobias/AppData
-/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/To
-bias/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.
-pfb><C:/Users/Tobias/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb><C:/Users/Tobias/AppData/Local/Programs/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmti10.pfb><C:/Users/Tobias/AppData/Local/Programs/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on qad_description.pdf (5 pages, 145429 bytes).
-PDF statistics:
- 144 PDF objects out of 1000 (max. 8388607)
- 15 named destinations out of 1000 (max. 500000)
- 80 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 12029 strings out of 427796
+ 180735 string characters out of 3147610
+ 393117 words of memory out of 3000000
+ 15929 multiletter control sequences out of 15000+200000
+ 8865 words of font info for 43 fonts, out of 3000000 for 9000
+ 1328 hyphenation exceptions out of 8191
+ 41i,7n,51p,9163b,391s stack positions out of 5000i,500n,10000p,200000b,50000s
 
+Output written on qad_description.pdf (5 pages).
